@@ -1,5 +1,7 @@
-package net.estebanrodriguez.apps.classtrip.contact_info;
+package net.estebanrodriguez.apps.classtrip.model.contact_info;
 
+
+import java.util.List;
 
 public class StandardContactInfo implements ContactInfo {
 
@@ -12,8 +14,8 @@ public class StandardContactInfo implements ContactInfo {
     }
 
     @Override
-    public PhoneNumberInfo getPhoneNumbers() {
-        return null;
+    public List<PhoneNumber> getPhoneNumbers() {
+        return mPhoneNumberInfo.getAllPhoneNumbers();
     }
 
     @Override
@@ -22,7 +24,7 @@ public class StandardContactInfo implements ContactInfo {
     }
 
     @Override
-    public String getEmails() {
+    public String getEmail() {
         return mAddress.getEmail();
     }
 

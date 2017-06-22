@@ -1,4 +1,4 @@
-package net.estebanrodriguez.apps.classtrip.exceptions;
+package net.estebanrodriguez.apps.classtrip.model.exceptions;
 
 
 public class CountryISONotFoundException extends Exception {

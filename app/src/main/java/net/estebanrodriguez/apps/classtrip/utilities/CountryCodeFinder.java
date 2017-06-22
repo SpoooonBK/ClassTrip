@@ -3,7 +3,7 @@ package net.estebanrodriguez.apps.classtrip.utilities;
 import android.content.Context;
 import android.telephony.TelephonyManager;
 
-import net.estebanrodriguez.apps.classtrip.exceptions.CountryISONotFoundException;
+import net.estebanrodriguez.apps.classtrip.model.exceptions.CountryISONotFoundException;
 
 import java.util.Locale;
 

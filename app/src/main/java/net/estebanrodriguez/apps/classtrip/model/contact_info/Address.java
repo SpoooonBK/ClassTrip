@@ -1,4 +1,4 @@
-package net.estebanrodriguez.apps.classtrip.contact_info;
+package net.estebanrodriguez.apps.classtrip.model.contact_info;
 
 
 import android.text.TextUtils;

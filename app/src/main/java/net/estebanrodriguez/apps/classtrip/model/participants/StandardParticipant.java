@@ -1,6 +1,6 @@
-package net.estebanrodriguez.apps.classtrip.participants;
+package net.estebanrodriguez.apps.classtrip.model.participants;
 
-import net.estebanrodriguez.apps.classtrip.contact_info.ContactInfo;
+import net.estebanrodriguez.apps.classtrip.model.contact_info.ContactInfo;
 
 public class StandardParticipant extends Participant {
 
