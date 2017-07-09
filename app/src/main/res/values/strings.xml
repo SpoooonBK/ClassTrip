@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Class Trip</string>
+    <string name="date">Date</string>
+    <string name="time">Time</string>
+    <string name="name">Trip Name</string>
+    <string name="address">Address</string>
 </resources>
