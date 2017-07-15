@@ -9,4 +9,5 @@
     <string name="emergency_contact_name">Emergency Contact Name</string>
     <string name="phone">Phone</string>
     <string name="email">Email</string>
+    <string name="size">Size:</string>
 </resources>
