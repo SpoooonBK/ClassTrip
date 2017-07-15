@@ -1,20 +1,13 @@
-package net.estebanrodriguez.apps.classtrip;
+package net.estebanrodriguez.apps.classtrip.ui.activities;
 
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.Button;
-import android.widget.TextView;
 
-import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
-import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.location.places.Place;
-import com.google.android.gms.location.places.ui.PlacePicker;
 
+import net.estebanrodriguez.apps.classtrip.R;
 import net.estebanrodriguez.apps.classtrip.utilities.GoogleApiClientHelper;
 
-import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import timber.log.Timber;
@@ -61,4 +54,9 @@ public class MainActivity extends AppCompatActivity {
 //            address.setText(place.getAddress());
 //        }
 //    }
+
+    @OnClick(R.id.add_trip_fab)
+    public void addTrip(){
+
+    }
 }
