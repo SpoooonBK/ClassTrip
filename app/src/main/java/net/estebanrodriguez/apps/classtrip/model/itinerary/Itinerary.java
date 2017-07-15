@@ -1,10 +1,10 @@
 package net.estebanrodriguez.apps.classtrip.model.itinerary;
 
-import java.util.List;
+import java.util.Iterator;
 
 public interface Itinerary {
 
-    List<ItineraryItem> getItineraryItems();
-    void addItem();
+    Iterator<ItineraryItem> iterator();
+    void addItem(ItineraryItem item);
 
 }

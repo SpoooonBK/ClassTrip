@@ -7,7 +7,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
-public class ClassTrip implements Trip {
+public final class ClassTrip implements Trip {
 
     private final String mId;
     private String mName;
@@ -36,7 +36,7 @@ public class ClassTrip implements Trip {
 
     @Override
     public void updateItinerary() {
-        
+
     }
 
 
