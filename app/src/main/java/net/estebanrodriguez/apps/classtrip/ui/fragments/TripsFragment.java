@@ -14,9 +14,12 @@ import net.estebanrodriguez.apps.classtrip.R;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import timber.log.Timber;
 
 
 public class TripsFragment extends Fragment {
+
+    private final String ADD_TRIP = "add_trip";
 
     @BindView(R.id.trips_list) RecyclerView trips;
 
@@ -36,10 +39,24 @@ public class TripsFragment extends Fragment {
 
     @OnClick(R.id.add_trip_fab)
     public void addTrip(){
+        Timber.v("add trip clicked");
         displayAddTripFragment();
 
     }
 
     private void displayAddTripFragment(){
+        getFragmentManager()
+                .beginTransaction()
+                .hide(this)
+                .replace(R.id.fragment_holder, new AddTripFragment())
+                .addToBackStack(ADD_TRIP)
+                .commit();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        String title = getString(R.string.trips);
+        getActivity().setTitle(title);
     }
 }

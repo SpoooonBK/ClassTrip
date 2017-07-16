@@ -10,4 +10,6 @@
     <string name="phone">Phone</string>
     <string name="email">Email</string>
     <string name="size">Size:</string>
+    <string name="trips">Trips</string>
+    <string name="add_trip">Add Trip</string>
 </resources>
