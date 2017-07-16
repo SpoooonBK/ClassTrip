@@ -1,6 +1,7 @@
 package net.estebanrodriguez.apps.classtrip.ui.fragments;
 
 import android.app.DatePickerDialog;
+import android.app.DialogFragment;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -37,6 +38,13 @@ public class AddTripFragment extends Fragment{
         ButterKnife.bind(this, rootView);
         Timber.v("add trip");
 
+        assembleDatePickerDialog();
+
+
+        return rootView;
+    }
+
+    private void assembleDatePickerDialog(){
 
         final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
             @Override
@@ -44,7 +52,7 @@ public class AddTripFragment extends Fragment{
                 calendar.set(Calendar.YEAR, year);
                 calendar.set(Calendar.MONTH, month);
                 calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                updateLabel();
+                updateDateText();
             }
         };
 
@@ -60,16 +68,21 @@ public class AddTripFragment extends Fragment{
 
             }
         });
-
-        return rootView;
     }
 
 
-    private void updateLabel() {
+
+    private void updateDateText() {
 
         String myFormat = "MM/dd/yy"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
         dateEditText.setText(sdf.format(calendar.getTime()));
+    }
+
+    @OnClick(R.id.add_trip_time_edit_text)
+    public void showTimePickerDialog(){
+        DialogFragment dialogFragment = new TimePickerFragment();
+        dialogFragment.show(getFragmentManager(),"timePicker");
     }
 
 
