@@ -11,7 +11,9 @@
         android:id="@+id/toolbar_main"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:elevation="4dp">
+        android:elevation="4dp"
+        app:theme="@style/Base.Theme.AppCompat.Light.DarkActionBar"
+        >
     </android.support.v7.widget.Toolbar>
     <fragment
         android:id="@+id/trips_fragment"

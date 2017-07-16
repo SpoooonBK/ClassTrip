@@ -10,7 +10,7 @@ public class ItineraryItem {
     private String mTime;
     private String mNote;
 
-    public ItineraryItem() {
+    private ItineraryItem() {
     }
 
     public Place getPlace() {
@@ -45,5 +45,5 @@ public class ItineraryItem {
         mNote = note;
     }
 
-    //ToDo make Builder
+
 }

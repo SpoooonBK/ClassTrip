@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 
 import net.estebanrodriguez.apps.classtrip.R;
-import net.estebanrodriguez.apps.classtrip.model.trip.ClassTrip;
 import net.estebanrodriguez.apps.classtrip.model.trip.Trip;
 
 import butterknife.BindView;
@@ -41,7 +40,11 @@ public class AddTripFragment extends Fragment{
         String name = nameEditText.getText().toString();
         String address = addressEditText.getText().toString();
 
-        Trip trip = new ClassTrip(name);
+        Trip trip = new Trip.Builder(name)
+                .withStartDate(date)
+                .withStartTime(time)
+                .withPlace(address)
+                .build();
     }
 
     @Override
