@@ -1,5 +1,5 @@
 package net.estebanrodriguez.apps.classtrip.model.participants;
 
 public enum AccessType {
-    SCHOOL, ORGANIZER, LEADER, CHAPERONE, STUDENT
+    SCHOOL, ORGANIZER, LEADER, CHAPERONE, PARTICIPANT
 }
