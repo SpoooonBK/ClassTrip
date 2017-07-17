@@ -25,8 +25,8 @@ import timber.log.Timber;
 
 public class AddTripFragment extends Fragment{
 
-    @BindView(R.id.add_trip_date_edit_text) EditText dateEditText;
-    @BindView(R.id.add_trip_time_edit_text) EditText timeEditText;
+    @BindView(R.id.add_trip_date_start_edit_text) EditText dateEditText;
+    @BindView(R.id.add_trip_time_start_edit_text) EditText timeEditText;
     @BindView(R.id.add_trip_name_edit_text) EditText nameEditText;
     @BindView(R.id.add_trip_address_edit_text) EditText addressEditText;
 
@@ -79,7 +79,7 @@ public class AddTripFragment extends Fragment{
         dateEditText.setText(sdf.format(calendar.getTime()));
     }
 
-    @OnClick(R.id.add_trip_time_edit_text)
+    @OnClick(R.id.add_trip_time_start_edit_text)
     public void showTimePickerDialog(){
         DialogFragment dialogFragment = new TimePickerFragment();
         dialogFragment.show(getFragmentManager(),"timePicker");
