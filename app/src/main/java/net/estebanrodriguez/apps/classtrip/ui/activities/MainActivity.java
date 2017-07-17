@@ -20,7 +20,6 @@ import timber.log.Timber;
 public class MainActivity extends AppCompatActivity {
 
 
-    private static final int PLACE_PICKER_REQUEST = 1;
 //    @BindView(R.id.address)TextView address;
     @BindView(R.id.fragment_holder) FrameLayout mFragmentHolder;
     @BindView(R.id.toolbar_main) Toolbar mMainToolbar;
@@ -45,28 +44,6 @@ public class MainActivity extends AppCompatActivity {
             mMainToolbar.setTitle(title);
         }
     }
-
-//    @OnClick(R.id.mapButton)
-//    public void getPlacePicker(){
-//        PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
-//        try {
-//            Timber.v("Clicked");
-//            Intent intent = builder.build(this);
-//            startActivityForResult(intent, PLACE_PICKER_REQUEST);
-//        } catch (GooglePlayServicesRepairableException e) {
-//            e.printStackTrace();
-//        } catch (GooglePlayServicesNotAvailableException e) {
-//            e.printStackTrace();
-//        }
-//    }
-
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        if(requestCode == PLACE_PICKER_REQUEST && resultCode == RESULT_OK){
-//            Place place = PlacePicker.getPlace(this, data);
-//            address.setText(place.getAddress());
-//        }
-//    }
 
 
 }

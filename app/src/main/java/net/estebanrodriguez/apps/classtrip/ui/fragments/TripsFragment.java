@@ -2,6 +2,7 @@ package net.estebanrodriguez.apps.classtrip.ui.fragments;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
@@ -52,6 +53,8 @@ public class TripsFragment extends Fragment {
                 .addToBackStack(ADD_TRIP)
                 .commit();
     }
+
+
 
     @Override
     public void onResume() {

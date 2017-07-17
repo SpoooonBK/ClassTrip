@@ -4,6 +4,7 @@ import android.app.DatePickerDialog;
 import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -12,6 +13,11 @@ import android.view.ViewGroup;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TimePicker;
+
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
+import com.google.android.gms.common.GooglePlayServicesRepairableException;
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.ui.PlacePicker;
 
 import net.estebanrodriguez.apps.classtrip.R;
 import net.estebanrodriguez.apps.classtrip.model.trip.Trip;
@@ -25,7 +31,12 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import timber.log.Timber;
 
+import static android.app.Activity.RESULT_OK;
+
 public class AddTripFragment extends Fragment implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener{
+
+
+    private static final int PLACE_PICKER_REQUEST = 1;
 
     @BindView(R.id.add_trip_date_start_edit_text) EditText dateStartEditText;
     @BindView(R.id.add_trip_date_end_edit_text) EditText dateEndEditText;
@@ -87,6 +98,20 @@ public class AddTripFragment extends Fragment implements DatePickerDialog.OnDate
         dialogFragment.show(getFragmentManager(), "datePicker");
     }
 
+    @OnClick(R.id.add_trip_address_edit_text)
+    public void showPlacePicker(View view){
+        PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
+        try {
+            Timber.v("Clicked");
+            Intent intent = builder.build(getActivity());
+            startActivityForResult(intent, PLACE_PICKER_REQUEST);
+        } catch (GooglePlayServicesRepairableException e) {
+            e.printStackTrace();
+        } catch (GooglePlayServicesNotAvailableException e) {
+            e.printStackTrace();
+        }
+    }
+
 
 
     @Override
@@ -96,6 +121,13 @@ public class AddTripFragment extends Fragment implements DatePickerDialog.OnDate
         getActivity().setTitle(title);
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode == PLACE_PICKER_REQUEST && resultCode == RESULT_OK){
+            Place place = PlacePicker.getPlace(getActivity(), data);
+            addressEditText.setText(place.getAddress());
+        }
+    }
 
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
@@ -120,6 +152,9 @@ public class AddTripFragment extends Fragment implements DatePickerDialog.OnDate
     private void updateEditText(SimpleDateFormat sdf) {
         mClickedEditText.setText(sdf.format(calendar.getTime()));
     }
+
+
+
 
 
 

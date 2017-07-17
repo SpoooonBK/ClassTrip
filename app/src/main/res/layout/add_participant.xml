@@ -78,7 +78,7 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:inputType="phone"
-                android:hint="@string/address"
+                android:hint="@string/place"
                 android:minLines="2"
                 android:layout_marginRight="8dp"
                 app:layout_constraintRight_toRightOf="parent"
