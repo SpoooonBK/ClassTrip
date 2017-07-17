@@ -5,16 +5,26 @@ import android.text.TextUtils;
 
 public class Address {
 
-    private final String mEmail;
+    private String mEmail;
     private final String mAddressLine1;
     private final String mAddressLine2;
 
+    public Address(String email){
+        setEmail(email);
+        mAddressLine1 = "";
+        mAddressLine2 = "";
+    }
+
     public Address(String email, String addressLine1, String addressLine2) {
+        setEmail(email);
+        mAddressLine1 = addressLine1;
+        mAddressLine2 = addressLine2;
+    }
+
+    private void setEmail(String email){
         if(isValidEmail(email)){
             mEmail = email;
         } else mEmail = "";
-        mAddressLine1 = addressLine1;
-        mAddressLine2 = addressLine2;
     }
 
     public String getEmail() {
