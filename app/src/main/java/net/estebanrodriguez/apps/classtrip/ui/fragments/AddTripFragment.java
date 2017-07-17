@@ -25,8 +25,10 @@ import timber.log.Timber;
 
 public class AddTripFragment extends Fragment{
 
-    @BindView(R.id.add_trip_date_start_edit_text) EditText dateEditText;
-    @BindView(R.id.add_trip_time_start_edit_text) EditText timeEditText;
+    @BindView(R.id.add_trip_date_start_edit_text) EditText dateStartEditText;
+    @BindView(R.id.add_trip_date_end_edit_text) EditText dateEndEditText;
+    @BindView(R.id.add_trip_time_start_edit_text) EditText timeStartEditText;
+    @BindView(R.id.add_trip_time_end_edit_text) EditText timeEndEditText;
     @BindView(R.id.add_trip_name_edit_text) EditText nameEditText;
     @BindView(R.id.add_trip_address_edit_text) EditText addressEditText;
 
@@ -56,7 +58,7 @@ public class AddTripFragment extends Fragment{
             }
         };
 
-        dateEditText.setOnClickListener(new View.OnClickListener() {
+        dateStartEditText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 new DatePickerDialog(getActivity(),
@@ -76,11 +78,11 @@ public class AddTripFragment extends Fragment{
 
         String myFormat = "MM/dd/yy"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
-        dateEditText.setText(sdf.format(calendar.getTime()));
+        dateStartEditText.setText(sdf.format(calendar.getTime()));
     }
 
-    @OnClick(R.id.add_trip_time_start_edit_text)
-    public void showTimePickerDialog(){
+    @OnClick({R.id.add_trip_time_start_edit_text, R.id.add_trip_time_end_edit_text})
+    public void showTimePickerDialog(View view){
         DialogFragment dialogFragment = new TimePickerFragment();
         dialogFragment.show(getFragmentManager(),"timePicker");
     }
@@ -89,14 +91,16 @@ public class AddTripFragment extends Fragment{
     @OnClick(R.id.add_trip_done_fab)
     public void onAddTrip(){
 
-        String date = dateEditText.getText().toString();
-        String time = timeEditText.getText().toString();
+        String dateStart = dateStartEditText.getText().toString();
+        String dateEnd = dateEndEditText.getText().toString();
+        String timeStart = timeStartEditText.getText().toString();
+        String timeEnd = timeEndEditText.getText().toString();
         String name = nameEditText.getText().toString();
         String address = addressEditText.getText().toString();
 
         Trip trip = new Trip.Builder(name)
-                .withStartDate(date)
-                .withStartTime(time)
+                .withStartDate(dateStart)
+                .withStartTime(timeStart)
                 .withPlace(address)
                 .build();
     }
