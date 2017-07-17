@@ -48,7 +48,7 @@ public class TripsFragment extends Fragment {
         getFragmentManager()
                 .beginTransaction()
                 .hide(this)
-                .replace(R.id.fragment_holder, new AddTripFragment())
+                .add(R.id.fragment_holder, new AddTripFragment(), AddTripFragment.class.getSimpleName())
                 .addToBackStack(ADD_TRIP)
                 .commit();
     }
