@@ -45,4 +45,5 @@ public abstract class Participant {
     public AccessType getAccessType() {
         return mAccessType;
     }
+
 }

@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
@@ -22,6 +23,7 @@ import com.google.android.gms.location.places.ui.PlacePicker;
 import net.estebanrodriguez.apps.classtrip.R;
 import net.estebanrodriguez.apps.classtrip.model.trip.Trip;
 import net.estebanrodriguez.apps.classtrip.utilities.DateValidator;
+import net.estebanrodriguez.apps.classtrip.utilities.TimeValidator;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -43,12 +45,11 @@ public class AddTripFragment extends Fragment implements DatePickerDialog.OnDate
     @BindView(R.id.add_trip_date_end_edit_text) EditText dateEndEditText;
     @BindView(R.id.add_trip_time_start_edit_text) EditText timeStartEditText;
     @BindView(R.id.add_trip_time_end_edit_text) EditText timeEndEditText;
-    @BindView(R.id.add_participant_emergency_name_edit_text) EditText nameEditText;
-    @BindView(R.id.add_participant_emergency_phone_edit_text) EditText addressEditText;
+    @BindView(R.id.add_trip_place_edit_text) EditText placeEditText;
 
-    EditText mClickedEditText;
+    private EditText mClickedEditText;
+    private Calendar calendar = Calendar.getInstance();
 
-    final Calendar calendar = Calendar.getInstance();
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -60,27 +61,31 @@ public class AddTripFragment extends Fragment implements DatePickerDialog.OnDate
     @OnClick(R.id.add_trip_done_fab)
     public void onAddTrip(){
 
+
+        validateDates();
+        validateTimes();
+
+
+
+        String address = placeEditText.getText().toString();
+    }
+
+    private void validateDates(){
         String dateStart = dateStartEditText.getText().toString();
         String dateEnd = dateEndEditText.getText().toString();
-        areDatesValid(dateStart, dateEnd);
+        if(!DateValidator.isStartDateIsSameOrBeforeEndDate(dateStart, dateEnd)){
+            Toast.makeText(getActivity(), getString(R.string.dates_invalid),Toast.LENGTH_LONG).show();
+        }
+    }
 
-
-
+    private void validateTimes(){
         String timeStart = timeStartEditText.getText().toString();
         String timeEnd = timeEndEditText.getText().toString();
-        String name = nameEditText.getText().toString();
-        String address = addressEditText.getText().toString();
-
-        Trip trip = new Trip.Builder(name)
-                .withStartDate(dateStart)
-                .withStartTime(timeStart)
-                .withPlace(address)
-                .build();
+        if(!TimeValidator.isStartTimeBeforeEndTime(timeStart, timeEnd)){
+            Toast.makeText(getActivity(), getString(R.string.times_invalid),Toast.LENGTH_LONG).show();
+        }
     }
 
-    private boolean areDatesValid(String dateStart, String dateEnd){
-        return DateValidator.isStartDateIsSameOrBeforeEndDate(dateStart, dateEnd);
-    }
 
 
     @OnClick({R.id.add_trip_time_start_edit_text, R.id.add_trip_time_end_edit_text})
@@ -130,7 +135,11 @@ public class AddTripFragment extends Fragment implements DatePickerDialog.OnDate
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(requestCode == PLACE_PICKER_REQUEST && resultCode == RESULT_OK){
             Place place = PlacePicker.getPlace(getActivity(), data);
-            addressEditText.setText(place.getAddress());
+            String name = place.getName().toString();
+            String address = place.getAddress().toString();
+            String nameAndAddress = name + "\n" + address;
+
+            placeEditText.setText(nameAndAddress);
         }
     }
 
@@ -157,12 +166,6 @@ public class AddTripFragment extends Fragment implements DatePickerDialog.OnDate
     private void updateEditText(SimpleDateFormat sdf) {
         mClickedEditText.setText(sdf.format(calendar.getTime()));
     }
-
-
-
-
-
-
 
 
 

@@ -31,6 +31,8 @@
     <string name="organizer" translatable="true">Organizer</string>
     <string name="add_participant">Add Participant</string>
     <string name="role">Role</string>
+    <string name="dates_invalid">Start date should be same or before end date.</string>
+    <string name="times_invalid">Start time should be before end time.</string>
 
 
 </resources>

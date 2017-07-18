@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import net.estebanrodriguez.apps.classtrip.R;
@@ -36,9 +37,8 @@ public class AddParticipantFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        View rootview = inflater.inflate(R.layout.add_participant,container, false);
 
-        return rootview;
+        return inflater.inflate(R.layout.add_participant,container, false);
     }
 
     @Override
@@ -53,14 +53,33 @@ public class AddParticipantFragment extends Fragment {
         String firstName = mFirstNameEditText.getText().toString();
         String lastName = mLastNameEditText.getText().toString();
         String email = mEmailEditText.getText().toString();
+        AccessType accessType = getInputtedAccessType();
+
 
 
         Address address = new Address(email);
         PhoneNumberInfo phoneNumberInfo = setPhoneNumberInfo();
 
         ContactInfo contactInfo = new StandardContactInfo(address, phoneNumberInfo);
+        Participant participant = new StandardParticipant(firstName, lastName, contactInfo, accessType);
+    }
 
 
+    private AccessType getInputtedAccessType(){
+        RadioButton checkedRadioButton = (RadioButton) getActivity().findViewById(mRadioGroup.getCheckedRadioButtonId());
+        String accessType = checkedRadioButton.getText().toString();
+
+        final String leader = getString(R.string.leader);
+        final String chaperone = getString(R.string.chaperone);
+        final String organizer = getString(R.string.organizer);
+
+       if(accessType.equals(organizer)){
+           return AccessType.ORGANIZER;
+       }if(accessType.equals(leader)){
+           return AccessType.LEADER;
+       }if(accessType.equals(chaperone)){
+            return AccessType.CHAPERONE;
+       }else return AccessType.PARTICIPANT;
     }
 
     public PhoneNumberInfo setPhoneNumberInfo(){
