@@ -62,6 +62,10 @@ public class AddTripFragment extends Fragment implements DatePickerDialog.OnDate
 
         String dateStart = dateStartEditText.getText().toString();
         String dateEnd = dateEndEditText.getText().toString();
+        areDatesValid(dateStart, dateEnd);
+
+
+
         String timeStart = timeStartEditText.getText().toString();
         String timeEnd = timeEndEditText.getText().toString();
         String name = nameEditText.getText().toString();
@@ -74,9 +78,7 @@ public class AddTripFragment extends Fragment implements DatePickerDialog.OnDate
                 .build();
     }
 
-    private boolean areDatesValid(){
-        String dateStart = dateStartEditText.getText().toString();
-        String dateEnd = dateEndEditText.getText().toString();
+    private boolean areDatesValid(String dateStart, String dateEnd){
         return DateValidator.isStartDateIsSameOrBeforeEndDate(dateStart, dateEnd);
     }
 
@@ -137,7 +139,7 @@ public class AddTripFragment extends Fragment implements DatePickerDialog.OnDate
         calendar.set(Calendar.YEAR, year);
         calendar.set(Calendar.MONTH, month);
         calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-        String myFormat = "MM/dd/yy"; //In which you need put here
+        String myFormat = "MM/dd/yy";
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.getDefault());
         updateEditText(sdf);
     }
