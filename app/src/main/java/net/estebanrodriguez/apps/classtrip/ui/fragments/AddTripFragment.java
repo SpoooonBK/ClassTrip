@@ -21,6 +21,7 @@ import com.google.android.gms.location.places.ui.PlacePicker;
 
 import net.estebanrodriguez.apps.classtrip.R;
 import net.estebanrodriguez.apps.classtrip.model.trip.Trip;
+import net.estebanrodriguez.apps.classtrip.utilities.DateValidator;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -71,6 +72,12 @@ public class AddTripFragment extends Fragment implements DatePickerDialog.OnDate
                 .withStartTime(timeStart)
                 .withPlace(address)
                 .build();
+    }
+
+    private boolean areDatesValid(){
+        String dateStart = dateStartEditText.getText().toString();
+        String dateEnd = dateEndEditText.getText().toString();
+        return DateValidator.isStartDateIsSameOrBeforeEndDate(dateStart, dateEnd);
     }
 
 

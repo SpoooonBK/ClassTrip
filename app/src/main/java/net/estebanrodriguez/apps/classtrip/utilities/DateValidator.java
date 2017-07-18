@@ -22,7 +22,7 @@ public class DateValidator {
         return startDate.equals(endDate);
     }
 
-    public static boolean isStartDateBeforeEndDate(String startDate, String endDate) throws ParseException {
+    private static boolean isStartDateBeforeEndDate(String startDate, String endDate) throws ParseException {
         Date start = parseDate(startDate);
         Date end = parseDate(endDate);
         return start.before(end);
