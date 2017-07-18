@@ -39,11 +39,5 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void setToolBarTitle(String title){
-        if(mMainToolbar != null){
-            mMainToolbar.setTitle(title);
-        }
-    }
-
 
 }

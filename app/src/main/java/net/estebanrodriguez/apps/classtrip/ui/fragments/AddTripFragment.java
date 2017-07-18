@@ -42,8 +42,8 @@ public class AddTripFragment extends Fragment implements DatePickerDialog.OnDate
     @BindView(R.id.add_trip_date_end_edit_text) EditText dateEndEditText;
     @BindView(R.id.add_trip_time_start_edit_text) EditText timeStartEditText;
     @BindView(R.id.add_trip_time_end_edit_text) EditText timeEndEditText;
-    @BindView(R.id.add_trip_name_edit_text) EditText nameEditText;
-    @BindView(R.id.add_trip_address_edit_text) EditText addressEditText;
+    @BindView(R.id.add_participant_emergency_name_edit_text) EditText nameEditText;
+    @BindView(R.id.add_participant_emergency_phone_edit_text) EditText addressEditText;
 
     EditText mClickedEditText;
 
@@ -53,10 +53,6 @@ public class AddTripFragment extends Fragment implements DatePickerDialog.OnDate
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.add_trip, container, false);
         ButterKnife.bind(this, rootView);
-        Timber.v("add trip");
-
-
-
         return rootView;
     }
 
@@ -98,7 +94,7 @@ public class AddTripFragment extends Fragment implements DatePickerDialog.OnDate
         dialogFragment.show(getFragmentManager(), "datePicker");
     }
 
-    @OnClick(R.id.add_trip_address_edit_text)
+    @OnClick(R.id.add_trip_place_edit_text)
     public void showPlacePicker(View view){
         PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
         try {
@@ -152,6 +148,8 @@ public class AddTripFragment extends Fragment implements DatePickerDialog.OnDate
     private void updateEditText(SimpleDateFormat sdf) {
         mClickedEditText.setText(sdf.format(calendar.getTime()));
     }
+
+
 
 
 

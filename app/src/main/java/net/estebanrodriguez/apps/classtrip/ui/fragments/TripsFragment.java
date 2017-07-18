@@ -40,9 +40,7 @@ public class TripsFragment extends Fragment {
 
     @OnClick(R.id.add_trip_fab)
     public void addTrip(){
-        Timber.v("add trip clicked");
         displayAddTripFragment();
-
     }
 
     private void displayAddTripFragment(){
