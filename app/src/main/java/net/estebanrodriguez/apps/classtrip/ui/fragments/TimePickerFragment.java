@@ -1,11 +1,12 @@
 package net.estebanrodriguez.apps.classtrip.ui.fragments;
 
 import android.app.Dialog;
-import android.app.DialogFragment;
-import android.app.Fragment;
+
 import android.app.FragmentManager;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
+import android.support.v4.app.Fragment;
 import android.text.format.DateFormat;
 import android.widget.TimePicker;
 

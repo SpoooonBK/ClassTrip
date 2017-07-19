@@ -2,15 +2,17 @@ package net.estebanrodriguez.apps.classtrip.ui.fragments;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
-import android.app.DialogFragment;
-import android.app.Fragment;
+
+
 import android.os.Bundle;
-import android.widget.DatePicker;
+import android.support.v4.app.DialogFragment;
+import android.support.v4.app.Fragment;
+
 
 import java.util.Calendar;
 
 
-public class DatePickerFragment extends DialogFragment  {
+public class DatePickerFragment extends DialogFragment {
 
 
     @Override

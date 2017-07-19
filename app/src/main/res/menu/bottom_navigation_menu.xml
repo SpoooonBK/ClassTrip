@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/bottom_menu_item_trips"
+        android:title="@string/trips"
+        android:icon="@drawable/ic_explore_black_24px"
+        app:showAsAction="always"/>
+    <item
+        android:id="@+id/bottom_menu_item_participants"
+        android:title="@string/participants"
+        android:icon="@drawable/ic_face_black_24px"
+        app:showAsAction="always"/>
+    <item
+        android:id="@+id/bottom_menu_item_groups"
+        android:title="@string/groups"
+        android:icon="@drawable/ic_group_black_24px"
+        app:showAsAction="always"/>
+    <item
+        android:id="@+id/bottom_menu_item_messages"
+        android:title="@string/messages"
+        android:icon="@drawable/ic_message_black_24px"
+        app:showAsAction="always"/>
+
+</menu>

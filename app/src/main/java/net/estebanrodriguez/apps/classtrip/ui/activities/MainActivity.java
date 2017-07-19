@@ -1,6 +1,9 @@
 package net.estebanrodriguez.apps.classtrip.ui.activities;
 
 import android.app.FragmentManager;
+import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -12,6 +15,7 @@ import android.widget.FrameLayout;
 import com.google.android.gms.common.api.GoogleApiClient;
 
 import net.estebanrodriguez.apps.classtrip.R;
+import net.estebanrodriguez.apps.classtrip.ui.adapters.FragmentPagerAdapterImpl;
 import net.estebanrodriguez.apps.classtrip.utilities.GoogleApiClientHelper;
 
 import butterknife.BindView;
@@ -27,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
 //    @BindView(R.id.address)TextView address;
     @BindView(R.id.fragment_holder) FrameLayout mFragmentHolder;
     @BindView(R.id.toolbar_main) Toolbar mMainToolbar;
-    @BindView(R.id.pager) ViewPager mViewPager;
+    @BindView(R.id.main_bottom_navigation) BottomNavigationView mBottomNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
