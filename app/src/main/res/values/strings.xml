@@ -10,10 +10,15 @@
     <string name="mobile_phone">Mobile Phone</string>
     <string name="email">Email</string>
     <string name="size">Size:</string>
-    <string name="trips">Trips</string>
+
 
 
     <string name="same_as_start_date">same as start date</string>
+
+    <string name="trips">Trips</string>
+    <string name="participants">Participants</string>
+    <string name="groups">Groups</string>
+    <string name="messages">Messages</string>
 
 
     <!--addTrip Strings-->

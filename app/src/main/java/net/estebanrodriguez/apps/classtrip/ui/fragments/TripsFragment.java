@@ -1,10 +1,11 @@
 package net.estebanrodriguez.apps.classtrip.ui.fragments;
 
-import android.app.Fragment;
+
 import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +17,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import timber.log.Timber;
+
 
 
 public class TripsFragment extends Fragment {
@@ -50,6 +52,11 @@ public class TripsFragment extends Fragment {
                 .add(R.id.fragment_holder, new AddTripFragment(), AddTripFragment.class.getSimpleName())
                 .addToBackStack(ADD_TRIP)
                 .commit();
+    }
+
+
+    public static Fragment getInstance(){
+        return new TripsFragment();
     }
 
 

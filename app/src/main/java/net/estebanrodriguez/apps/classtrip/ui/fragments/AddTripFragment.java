@@ -2,11 +2,11 @@ package net.estebanrodriguez.apps.classtrip.ui.fragments;
 
 import android.app.DatePickerDialog;
 import android.app.DialogFragment;
-import android.app.Fragment;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -59,15 +59,10 @@ public class AddTripFragment extends Fragment implements DatePickerDialog.OnDate
     }
 
     @OnClick(R.id.add_trip_done_fab)
-    public void onAddTrip(){
-
-
+    public void onAddTripDoneClicked(){
         validateDates();
         validateTimes();
 
-
-
-        String address = placeEditText.getText().toString();
     }
 
     private void validateDates(){
