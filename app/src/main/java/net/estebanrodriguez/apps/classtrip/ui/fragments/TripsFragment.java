@@ -5,6 +5,7 @@ import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -27,10 +28,12 @@ public class TripsFragment extends Fragment {
     private Unbinder mUnbinder;
 
     @BindView(R.id.trips_list) RecyclerView trips;
+    @BindView(R.id.add_trip_fab) FloatingActionButton mFloatingActionButton;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
 
     }
 
@@ -39,19 +42,29 @@ public class TripsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState){
         View rootView = inflater.inflate(R.layout.trips_fragment, container, false);
         mUnbinder = ButterKnife.bind(this, rootView);
+
+        trips.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                switch (newState){
+                    case RecyclerView.SCROLL_STATE_DRAGGING:
+                        mFloatingActionButton.hide();
+                        case RecyclerView.SCROLL_STATE_SETTLING:
+                            mFloatingActionButton.show();
+                }
+            }
+        });
+
+
         return rootView;
     }
 
     @OnClick(R.id.add_trip_fab)
-    public void addTrip(){
-        displayAddTripFragment();
-    }
-
-    private void displayAddTripFragment(){
+    public void displayAddTripFragment(){
         getFragmentManager()
                 .beginTransaction()
-                .hide(this)
-                .add(R.id.fragment_holder, new AddTripFragment(), AddTripFragment.class.getSimpleName())
+                .replace(R.id.fragment_holder, new AddTripFragment(), AddTripFragment.class.getSimpleName())
                 .addToBackStack(ADD_TRIP)
                 .commit();
     }

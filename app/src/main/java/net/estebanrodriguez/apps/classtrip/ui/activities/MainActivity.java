@@ -116,12 +116,13 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     }
 
 
-
     private void displayFragment(Fragment fragment, String tag){
         getSupportFragmentManager().popBackStackImmediate();
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragment_holder, fragment, tag)
                 .commit();
     }
+
+
 
 }
