@@ -18,7 +18,10 @@ public class GroupsFragment extends Fragment {
         return inflater.inflate(R.layout.groups_fragment, container, false);
     }
 
-    public static Fragment getInstance(){
-        return new GroupsFragment();
+    @Override
+    public void onResume() {
+        super.onResume();
+        String title = getString(R.string.groups);
+        getActivity().setTitle(title);
     }
 }

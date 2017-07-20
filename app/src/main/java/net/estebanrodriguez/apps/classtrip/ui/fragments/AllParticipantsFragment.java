@@ -10,18 +10,18 @@ import android.view.ViewGroup;
 import net.estebanrodriguez.apps.classtrip.R;
 
 
-public class MessagesFragment extends Fragment {
+public class AllParticipantsFragment extends Fragment {
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.messages, container, false);
+        return inflater.inflate(R.layout.all_participants_fragment, container, false);
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        String title = getString(R.string.messages);
+        String title = getString(R.string.participants);
         getActivity().setTitle(title);
     }
 }

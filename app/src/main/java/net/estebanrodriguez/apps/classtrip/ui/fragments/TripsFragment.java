@@ -16,6 +16,7 @@ import net.estebanrodriguez.apps.classtrip.R;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.Unbinder;
 import timber.log.Timber;
 
 
@@ -23,6 +24,7 @@ import timber.log.Timber;
 public class TripsFragment extends Fragment {
 
     private final String ADD_TRIP = "add_trip";
+    private Unbinder mUnbinder;
 
     @BindView(R.id.trips_list) RecyclerView trips;
 
@@ -36,7 +38,7 @@ public class TripsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState){
         View rootView = inflater.inflate(R.layout.trips_fragment, container, false);
-        ButterKnife.bind(this, rootView);
+        mUnbinder = ButterKnife.bind(this, rootView);
         return rootView;
     }
 
@@ -66,5 +68,10 @@ public class TripsFragment extends Fragment {
         super.onResume();
         String title = getString(R.string.trips);
         getActivity().setTitle(title);
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
     }
 }

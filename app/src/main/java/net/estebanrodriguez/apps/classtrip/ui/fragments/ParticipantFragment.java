@@ -18,7 +18,10 @@ public class ParticipantFragment extends Fragment {
         return inflater.inflate(R.layout.participant_fragment,container,false);
     }
 
-    public static Fragment getInstance(){
-        return new ParticipantFragment();
+    @Override
+    public void onResume() {
+        super.onResume();
+        String title = getString(R.string.participant);
+        getActivity().setTitle(title);
     }
 }

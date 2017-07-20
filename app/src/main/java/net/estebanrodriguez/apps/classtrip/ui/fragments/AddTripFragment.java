@@ -34,6 +34,7 @@ import java.util.Locale;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.Unbinder;
 import timber.log.Timber;
 
 import static android.app.Activity.RESULT_OK;
@@ -51,12 +52,13 @@ public class AddTripFragment extends Fragment implements DatePickerDialog.OnDate
 
     private EditText mClickedEditText;
     private Calendar calendar = Calendar.getInstance();
+    private Unbinder mUnbinder;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.add_trip, container, false);
-        ButterKnife.bind(this, rootView);
+        mUnbinder = ButterKnife.bind(this, rootView);
         return rootView;
     }
 
@@ -164,6 +166,8 @@ public class AddTripFragment extends Fragment implements DatePickerDialog.OnDate
         mClickedEditText.setText(sdf.format(calendar.getTime()));
     }
 
-
-
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+    }
 }
