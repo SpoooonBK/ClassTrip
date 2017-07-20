@@ -1,6 +1,6 @@
 package net.estebanrodriguez.apps.classtrip.ui.activities;
 
-import android.app.TimePickerDialog;
+import android.animation.Animator;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.FrameLayout;
 
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -16,7 +17,6 @@ import net.estebanrodriguez.apps.classtrip.R;
 import net.estebanrodriguez.apps.classtrip.ui.fragments.AllParticipantsFragment;
 import net.estebanrodriguez.apps.classtrip.ui.fragments.GroupsFragment;
 import net.estebanrodriguez.apps.classtrip.ui.fragments.MessagesFragment;
-import net.estebanrodriguez.apps.classtrip.ui.fragments.ParticipantFragment;
 import net.estebanrodriguez.apps.classtrip.ui.fragments.TripsFragment;
 import net.estebanrodriguez.apps.classtrip.utilities.GoogleApiClientHelper;
 
@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     @BindView(R.id.fragment_holder) FrameLayout mFragmentHolder;
     @BindView(R.id.toolbar_main) Toolbar mMainToolbar;
     @BindView(R.id.main_bottom_navigation) BottomNavigationView mBottomNavigationView;
+    private int mBottomNavHeight;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -121,6 +122,57 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragment_holder, fragment, tag)
                 .commit();
+    }
+
+    public void hideBottomNavigation(){
+
+        mBottomNavigationView.setVisibility(View.VISIBLE);
+        mBottomNavigationView.animate()
+                .translationYBy(mBottomNavigationView.getHeight())
+                .alpha(0.0f)
+                .setListener(getTogglingVisibilityAnimationListener(mBottomNavigationView));
+    }
+
+    public void showBottomNavigation(){
+
+        mBottomNavigationView.setVisibility(View.INVISIBLE);
+        mBottomNavigationView.animate()
+                .translationYBy(-mBottomNavigationView.getHeight())
+                .alpha(1.0f)
+                .setListener(getTogglingVisibilityAnimationListener(mBottomNavigationView));
+
+    }
+
+
+    private Animator.AnimatorListener getTogglingVisibilityAnimationListener(final View view){
+        Animator.AnimatorListener listener = new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+
+                if(view.getVisibility() == View.VISIBLE){
+                    view.setVisibility(View.GONE);
+                }else if(view.getVisibility() == View.INVISIBLE){
+                    view.setVisibility(View.VISIBLE);
+                }
+
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+
+            }
+        };
+        return listener;
     }
 
 

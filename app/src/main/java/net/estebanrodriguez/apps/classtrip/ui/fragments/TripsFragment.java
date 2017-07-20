@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import net.estebanrodriguez.apps.classtrip.R;
+import net.estebanrodriguez.apps.classtrip.ui.activities.MainActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -67,6 +68,8 @@ public class TripsFragment extends Fragment {
                 .replace(R.id.fragment_holder, new AddTripFragment(), AddTripFragment.class.getSimpleName())
                 .addToBackStack(ADD_TRIP)
                 .commit();
+
+        ((MainActivity)getActivity()).hideBottomNavigation();
     }
 
 

@@ -24,6 +24,7 @@ import com.google.android.gms.location.places.ui.PlacePicker;
 
 import net.estebanrodriguez.apps.classtrip.R;
 import net.estebanrodriguez.apps.classtrip.model.trip.Trip;
+import net.estebanrodriguez.apps.classtrip.ui.activities.MainActivity;
 import net.estebanrodriguez.apps.classtrip.utilities.DateValidator;
 import net.estebanrodriguez.apps.classtrip.utilities.TimeValidator;
 
@@ -66,6 +67,8 @@ public class AddTripFragment extends Fragment implements DatePickerDialog.OnDate
     public void onAddTripDoneClicked(){
         validateDates();
         validateTimes();
+        ((MainActivity)getActivity()).showBottomNavigation();
+        getFragmentManager().popBackStack();
 
     }
 
