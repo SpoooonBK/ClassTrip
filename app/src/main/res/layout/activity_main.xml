@@ -7,35 +7,35 @@
     android:layout_height="match_parent"
     tools:context="net.estebanrodriguez.apps.classtrip.ui.activities.MainActivity">
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar_main"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:elevation="4dp"
-            android:layout_alignParentTop="true"
-            android:background="@color/primary_light"
-            app:theme="@style/AppTheme">
-        </android.support.v7.widget.Toolbar>
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_main"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_alignParentTop="true"
+        android:background="@color/primary_light"
+        android:elevation="4dp"
+        app:theme="@style/AppTheme">
+    </android.support.v7.widget.Toolbar>
 
     <FrameLayout
         android:id="@+id/fragment_holder"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/toolbar_main"
-        android:layout_above="@+id/main_bottom_navigation">
+        android:layout_above="@+id/main_bottom_navigation"
+        android:layout_below="@+id/toolbar_main">
     </FrameLayout>
 
     <android.support.design.widget.BottomNavigationView
-        android:fitsSystemWindows="true"
         android:id="@+id/main_bottom_navigation"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        app:menu="@menu/bottom_navigation_menu"
         android:layout_alignParentBottom="true"
-        android:elevation="8dp"
         android:background="@color/primary"
+        android:elevation="8dp"
+        android:fitsSystemWindows="true"
         app:itemIconTint="@drawable/bottom_menu_color_state"
         app:itemTextColor="@drawable/bottom_menu_color_state"
+        app:menu="@menu/bottom_navigation_menu"
         >
 
     </android.support.design.widget.BottomNavigationView>
