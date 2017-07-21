@@ -2,8 +2,6 @@ package net.estebanrodriguez.apps.classtrip.model.itinerary;
 
 import net.estebanrodriguez.apps.classtrip.model.trip.Place;
 
-import java.util.Calendar;
-
 public class ItineraryItem {
     private Place mPlace;
     private String mDate;

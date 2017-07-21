@@ -2,12 +2,9 @@ package net.estebanrodriguez.apps.classtrip.ui.fragments;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
-
-
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
-
 
 import java.util.Calendar;
 

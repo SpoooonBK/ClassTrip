@@ -1,9 +1,6 @@
 package net.estebanrodriguez.apps.classtrip.model.trip;
 
-import com.google.android.gms.common.api.GoogleApiClient;
-
 import net.estebanrodriguez.apps.classtrip.model.itinerary.Itinerary;
-import net.estebanrodriguez.apps.classtrip.model.itinerary.ItineraryItem;
 import net.estebanrodriguez.apps.classtrip.model.itinerary.TripItinerary;
 
 import java.util.UUID;

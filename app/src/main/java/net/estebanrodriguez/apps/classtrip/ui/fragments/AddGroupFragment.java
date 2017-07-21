@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import net.estebanrodriguez.apps.classtrip.R;
-import net.estebanrodriguez.apps.classtrip.ui.activities.MainActivity;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;

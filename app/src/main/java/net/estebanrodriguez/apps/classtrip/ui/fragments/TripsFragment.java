@@ -1,8 +1,6 @@
 package net.estebanrodriguez.apps.classtrip.ui.fragments;
 
 
-import android.app.FragmentManager;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -19,7 +17,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
-import timber.log.Timber;
 
 
 

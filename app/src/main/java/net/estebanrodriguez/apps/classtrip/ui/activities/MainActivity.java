@@ -1,14 +1,12 @@
 package net.estebanrodriguez.apps.classtrip.ui.activities;
 
-import android.animation.Animator;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.FrameLayout;
 
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -25,12 +23,14 @@ import butterknife.ButterKnife;
 import timber.log.Timber;
 
 
+public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 
-public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener{
-
-    @BindView(R.id.fragment_holder) FrameLayout mFragmentHolder;
-    @BindView(R.id.toolbar_main) Toolbar mMainToolbar;
-    @BindView(R.id.main_bottom_navigation) BottomNavigationView mBottomNavigationView;
+    @BindView(R.id.fragment_holder)
+    FrameLayout mFragmentHolder;
+    @BindView(R.id.toolbar_main)
+    Toolbar mMainToolbar;
+    @BindView(R.id.main_bottom_navigation)
+    BottomNavigationView mBottomNavigationView;
     boolean mIsMainNavHidden;
 
     @Override
@@ -47,14 +47,14 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     }
 
 
-    private void connectToGoogleApiClient(){
+    private void connectToGoogleApiClient() {
 
         GoogleApiClientHelper helper = new GoogleApiClientHelper(this);
         GoogleApiClient googleApiClient = helper.getGoogleApiClient();
         googleApiClient.connect();
     }
 
-    private void setOnNavigationItemSelectedListener(){
+    private void setOnNavigationItemSelectedListener() {
 
         mBottomNavigationView.setOnNavigationItemSelectedListener(this);
     }
@@ -66,65 +66,66 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         String tag = getTagByItemID(item.getItemId());
 
         fragment = getSupportFragmentManager().findFragmentByTag(tag);
-        if(fragment != null){
+        if (fragment != null) {
             displayFragment(fragment, tag);
-        }else
+        } else
             fragment = getNewFragmentByItemID(item.getItemId());
-            displayFragment(fragment, tag);
+        displayFragment(fragment, tag);
         return true;
     }
 
-    private String getTagByItemID(int itemId){
+    private String getTagByItemID(int itemId) {
 
-        switch (itemId){
-            case R.id.bottom_menu_item_trips:{
+        switch (itemId) {
+            case R.id.bottom_menu_item_trips: {
                 return TripsFragment.class.getSimpleName();
             }
-            case R.id.bottom_menu_item_participants:{
+            case R.id.bottom_menu_item_participants: {
                 return AllParticipantsFragment.class.getSimpleName();
             }
 
-            case R.id.bottom_menu_item_groups:{
+            case R.id.bottom_menu_item_groups: {
                 return GroupsFragment.class.getSimpleName();
             }
 
-            case R.id.bottom_menu_item_messages:{
+            case R.id.bottom_menu_item_messages: {
                 return MessagesFragment.class.getSimpleName();
             }
-            default: return TripsFragment.class.getSimpleName();
+            default:
+                return TripsFragment.class.getSimpleName();
         }
     }
 
     private Fragment getNewFragmentByItemID(int itemId) {
-        Fragment fragment;
-        switch (itemId){
-            case R.id.bottom_menu_item_trips:{
+        switch (itemId) {
+            case R.id.bottom_menu_item_trips: {
                 return new TripsFragment();
             }
-            case R.id.bottom_menu_item_participants:{
+            case R.id.bottom_menu_item_participants: {
                 return new AllParticipantsFragment();
             }
 
-            case R.id.bottom_menu_item_groups:{
+            case R.id.bottom_menu_item_groups: {
                 return new GroupsFragment();
             }
 
-            case R.id.bottom_menu_item_messages:{
+            case R.id.bottom_menu_item_messages: {
                 return new MessagesFragment();
             }
-            default: return new TripsFragment();
+            default:
+                return new TripsFragment();
         }
     }
 
 
-    private void displayFragment(Fragment fragment, String tag){
+    private void displayFragment(Fragment fragment, String tag) {
         getSupportFragmentManager().popBackStackImmediate();
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragment_holder, fragment, tag)
                 .commit();
     }
 
-    public void hideBottomNavigation(){
+    public void hideBottomNavigation() {
 
 
         mBottomNavigationView.animate()
@@ -134,7 +135,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
     }
 
-    public void showBottomNavigation(){
+    public void showBottomNavigation() {
 
         mBottomNavigationView.animate()
                 .translationYBy(-mBottomNavigationView.getHeight())
@@ -147,7 +148,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        if(mIsMainNavHidden){
+        if (mIsMainNavHidden) {
             showBottomNavigation();
         }
     }

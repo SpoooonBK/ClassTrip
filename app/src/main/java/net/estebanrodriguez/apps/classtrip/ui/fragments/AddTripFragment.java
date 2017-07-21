@@ -1,9 +1,6 @@
 package net.estebanrodriguez.apps.classtrip.ui.fragments;
 
 import android.app.DatePickerDialog;
-
-
-import android.app.FragmentManager;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -24,7 +21,6 @@ import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlacePicker;
 
 import net.estebanrodriguez.apps.classtrip.R;
-import net.estebanrodriguez.apps.classtrip.model.trip.Trip;
 import net.estebanrodriguez.apps.classtrip.ui.activities.MainActivity;
 import net.estebanrodriguez.apps.classtrip.utilities.DateValidator;
 import net.estebanrodriguez.apps.classtrip.utilities.TimeValidator;
