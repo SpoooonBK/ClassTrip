@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import net.estebanrodriguez.apps.classtrip.R;
+import net.estebanrodriguez.apps.classtrip.ui.activities.MainActivity;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -24,8 +25,9 @@ public class AddGroupFragment extends Fragment {
     }
 
     @OnClick(R.id.add_group_done_fab)
-    public void addGroup(){
+    public void addGroupDone(){
         //Todo implement
+        ((MainActivity)getActivity()).showBottomNavigation();
         getFragmentManager().popBackStack();
     }
 
