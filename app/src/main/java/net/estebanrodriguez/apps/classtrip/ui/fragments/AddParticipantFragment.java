@@ -21,8 +21,10 @@ import net.estebanrodriguez.apps.classtrip.model.contact_info.StandardContactInf
 import net.estebanrodriguez.apps.classtrip.model.participants.AccessType;
 import net.estebanrodriguez.apps.classtrip.model.participants.Participant;
 import net.estebanrodriguez.apps.classtrip.model.participants.StandardParticipant;
+import net.estebanrodriguez.apps.classtrip.ui.activities.MainActivity;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class AddParticipantFragment extends Fragment {
@@ -38,8 +40,10 @@ public class AddParticipantFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
+        View rootView = inflater.inflate(R.layout.add_participant, container, false);
+        ButterKnife.bind(this, rootView);
 
-        return inflater.inflate(R.layout.add_participant,container, false);
+        return rootView;
     }
 
     @Override
@@ -63,6 +67,8 @@ public class AddParticipantFragment extends Fragment {
 
         ContactInfo contactInfo = new StandardContactInfo(address, phoneNumberInfo);
         Participant participant = new StandardParticipant(firstName, lastName, contactInfo, accessType);
+        ((MainActivity)getActivity()).showBottomNavigation();
+        getFragmentManager().popBackStack();
     }
 
 

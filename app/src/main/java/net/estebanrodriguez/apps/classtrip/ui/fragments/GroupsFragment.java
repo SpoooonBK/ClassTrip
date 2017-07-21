@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import net.estebanrodriguez.apps.classtrip.R;
+import net.estebanrodriguez.apps.classtrip.ui.activities.MainActivity;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -28,6 +29,7 @@ public class GroupsFragment extends Fragment {
     @OnClick
     public void displayAddGroupsFragment(){
         String tag = AddGroupFragment.class.getSimpleName();
+        ((MainActivity)getActivity()).hideBottomNavigation();
         getFragmentManager().beginTransaction()
                 .replace(R.id.fragment_holder, new AddGroupFragment(), tag)
                 .addToBackStack(tag)

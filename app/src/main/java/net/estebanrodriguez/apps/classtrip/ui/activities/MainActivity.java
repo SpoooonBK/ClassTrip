@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     @BindView(R.id.fragment_holder) FrameLayout mFragmentHolder;
     @BindView(R.id.toolbar_main) Toolbar mMainToolbar;
     @BindView(R.id.main_bottom_navigation) BottomNavigationView mBottomNavigationView;
-    private int mBottomNavHeight;
+    boolean mIsMainNavHidden;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -126,55 +126,29 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
     public void hideBottomNavigation(){
 
-        mBottomNavigationView.setVisibility(View.VISIBLE);
+
         mBottomNavigationView.animate()
                 .translationYBy(mBottomNavigationView.getHeight())
-                .alpha(0.0f)
-                .setListener(getTogglingVisibilityAnimationListener(mBottomNavigationView));
+                .alpha(0.0f);
+        mIsMainNavHidden = true;
+
     }
 
     public void showBottomNavigation(){
 
-        mBottomNavigationView.setVisibility(View.INVISIBLE);
         mBottomNavigationView.animate()
                 .translationYBy(-mBottomNavigationView.getHeight())
-                .alpha(1.0f)
-                .setListener(getTogglingVisibilityAnimationListener(mBottomNavigationView));
+                .alpha(1.0f);
+        mIsMainNavHidden = false;
 
     }
 
 
-    private Animator.AnimatorListener getTogglingVisibilityAnimationListener(final View view){
-        Animator.AnimatorListener listener = new Animator.AnimatorListener() {
-            @Override
-            public void onAnimationStart(Animator animation) {
-
-            }
-
-            @Override
-            public void onAnimationEnd(Animator animation) {
-
-                if(view.getVisibility() == View.VISIBLE){
-                    view.setVisibility(View.GONE);
-                }else if(view.getVisibility() == View.INVISIBLE){
-                    view.setVisibility(View.VISIBLE);
-                }
-
-            }
-
-            @Override
-            public void onAnimationCancel(Animator animation) {
-
-            }
-
-            @Override
-            public void onAnimationRepeat(Animator animation) {
-
-            }
-        };
-        return listener;
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        if(mIsMainNavHidden){
+            showBottomNavigation();
+        }
     }
-
-
-
 }

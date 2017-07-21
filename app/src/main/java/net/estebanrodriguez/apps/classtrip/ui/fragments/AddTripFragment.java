@@ -3,6 +3,7 @@ package net.estebanrodriguez.apps.classtrip.ui.fragments;
 import android.app.DatePickerDialog;
 
 
+import android.app.FragmentManager;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -173,4 +174,5 @@ public class AddTripFragment extends Fragment implements DatePickerDialog.OnDate
     public void onDestroyView() {
         super.onDestroyView();
     }
+
 }

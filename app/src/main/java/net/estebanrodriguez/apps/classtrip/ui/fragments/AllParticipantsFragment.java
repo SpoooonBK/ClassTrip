@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import net.estebanrodriguez.apps.classtrip.R;
+import net.estebanrodriguez.apps.classtrip.ui.activities.MainActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -35,10 +36,12 @@ public class AllParticipantsFragment extends Fragment {
 
     @OnClick(R.id.add_participant_fab)
     public void displayAddParticipantFragment(){
-        Timber.v("fab clicked");
+        ((MainActivity)getActivity()).hideBottomNavigation();
         getFragmentManager().beginTransaction()
                 .replace(R.id.fragment_holder, new AddParticipantFragment())
                 .addToBackStack(AddParticipantFragment.class.getSimpleName())
                 .commit();
     }
+
+
 }
