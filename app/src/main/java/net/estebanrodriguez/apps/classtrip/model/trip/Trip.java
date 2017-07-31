@@ -9,19 +9,19 @@ import java.util.UUID;
 
 public final class Trip {
 
-    private String mId;
+    private String mTripId;
     private List<String> mOrganizerIds;
     private String mTripName;
     private Itinerary mItinerary;
 
     private Trip(Builder builder) {
         mTripName = builder.mName;
-        mId = UUID.randomUUID().toString();
+        mTripId = UUID.randomUUID().toString();
         mItinerary = new TripItinerary();
         mOrganizerIds = new ArrayList<>();
     }
 
-    public String getId() {
+    public String getTripId() {
         return null;
     }
 
@@ -40,33 +40,46 @@ public final class Trip {
     public static class Builder{
 
         private String mName;
+        private String mStartDate;
+        private String mEndDate;
+        private String mStartTime;
+        private String mEndTime;
+        private String mPlace;
+        private String mOrganizerId;
+
+
 
         public Builder(String name){
             mName = name;
         }
 
-        public Builder withStartDate(String date){
-            //Todo Implement
+        public Builder withStartDate(String startDate){
+            mStartDate = startDate;
             return this;
         }
 
-        public Builder withEndDate(String date){
-            //Todo Implement
+        public Builder withEndDate(String endDate){
+            mEndDate = endDate;
             return this;
         }
 
         public Builder withStartTime(String startTime){
-            //Todo Implement
+            mStartTime = startTime;
             return this;
         }
 
         public Builder withEndTime(String endTime){
-            //Todo Implement
+            mEndTime = endTime;
             return this;
         }
 
         public Builder withPlace(String place){
-            //Todo Implement
+            mPlace = place;
+            return this;
+        }
+
+        public Builder withOrganizer(String organizerId){
+            mOrganizerId = organizerId;
             return this;
         }
 
