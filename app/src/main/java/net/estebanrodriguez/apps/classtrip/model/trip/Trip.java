@@ -3,11 +3,14 @@ package net.estebanrodriguez.apps.classtrip.model.trip;
 import net.estebanrodriguez.apps.classtrip.model.itinerary.Itinerary;
 import net.estebanrodriguez.apps.classtrip.model.itinerary.TripItinerary;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 public final class Trip {
 
     private String mId;
+    private List<String> mOrganizerIds;
     private String mTripName;
     private Itinerary mItinerary;
 
@@ -15,6 +18,7 @@ public final class Trip {
         mTripName = builder.mName;
         mId = UUID.randomUUID().toString();
         mItinerary = new TripItinerary();
+        mOrganizerIds = new ArrayList<>();
     }
 
     public String getId() {
@@ -27,6 +31,10 @@ public final class Trip {
 
     public Itinerary getItinerary() {
         return mItinerary;
+    }
+
+    public void addOrganizerID(String id){
+       mOrganizerIds.add(id);
     }
 
     public static class Builder{
