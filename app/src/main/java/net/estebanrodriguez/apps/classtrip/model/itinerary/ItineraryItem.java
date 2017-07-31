@@ -4,9 +4,12 @@ import net.estebanrodriguez.apps.classtrip.model.trip.Place;
 
 public class ItineraryItem {
     private Place mPlace;
-    private String mDate;
-    private String mTime;
+    private String mStartDate;
+    private String mEndDate;
+    private String mStartTime;
+    private String mEndTime;
     private String mNote;
+
 
     private ItineraryItem() {
     }
@@ -19,20 +22,20 @@ public class ItineraryItem {
         mPlace = place;
     }
 
-    public String getDate() {
-        return mDate;
+    public String getStartDate() {
+        return mStartDate;
     }
 
-    public void setDate(String date) {
-        mDate = date;
+    public void setStartDate(String startDate) {
+        mStartDate = startDate;
     }
 
-    public String getTime() {
-        return mTime;
+    public String getStartTime() {
+        return mStartTime;
     }
 
-    public void setTime(String time) {
-        mTime = time;
+    public void setStartTime(String startTime) {
+        mStartTime = startTime;
     }
 
     public String getNote() {
@@ -41,6 +44,22 @@ public class ItineraryItem {
 
     public void setNote(String note) {
         mNote = note;
+    }
+
+    public String getEndDate() {
+        return mEndDate;
+    }
+
+    public void setEndDate(String endDate) {
+        mEndDate = endDate;
+    }
+
+    public String getEndTime() {
+        return mEndTime;
+    }
+
+    public void setEndTime(String endTime) {
+        mEndTime = endTime;
     }
 
 
