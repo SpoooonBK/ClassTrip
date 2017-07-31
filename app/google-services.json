@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "337579504895",
+    "firebase_url": "https://class-trip-1498248877352.firebaseio.com",
+    "project_id": "class-trip-1498248877352",
+    "storage_bucket": "class-trip-1498248877352.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:337579504895:android:239b39f805cd435d",
+        "android_client_info": {
+          "package_name": "net.estebanrodriguez.apps.classtrip"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "337579504895-2l9c4b7as300s1u3hpkkfrdh0nf7imn4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "net.estebanrodriguez.apps.classtrip",
+            "certificate_hash": "04729bd26a924eb4bfd4f890c8b705cd443b6506"
+          }
+        },
+        {
+          "client_id": "337579504895-lmd5dhk3hvjt7oj628hhli960e6vf4jt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCAz-pbNrlp2trTdenl1SQ2MqfyQrhqSJQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "337579504895-lmd5dhk3hvjt7oj628hhli960e6vf4jt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

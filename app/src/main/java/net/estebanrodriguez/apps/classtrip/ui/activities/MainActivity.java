@@ -9,7 +9,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
 
+import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import net.estebanrodriguez.apps.classtrip.R;
 import net.estebanrodriguez.apps.classtrip.ui.fragments.AllParticipantsFragment;
@@ -18,6 +23,8 @@ import net.estebanrodriguez.apps.classtrip.ui.fragments.MessagesFragment;
 import net.estebanrodriguez.apps.classtrip.ui.fragments.TripsFragment;
 import net.estebanrodriguez.apps.classtrip.utilities.GoogleApiClientHelper;
 
+import java.util.Arrays;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import timber.log.Timber;
@@ -25,6 +32,8 @@ import timber.log.Timber;
 
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 
+    private static final int RC_SIGN_IN = 1;
+    private static final String ANONYMOUS = "Anonymous";
     @BindView(R.id.fragment_holder)
     FrameLayout mFragmentHolder;
     @BindView(R.id.toolbar_main)
@@ -32,6 +41,11 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     @BindView(R.id.main_bottom_navigation)
     BottomNavigationView mBottomNavigationView;
     boolean mIsMainNavHidden;
+    private FirebaseDatabase mFirebaseDatabase;
+    private DatabaseReference mTripsDatabaseReference;
+    private FirebaseAuth mFirebaseAuth;
+    private FirebaseAuth.AuthStateListener mAuthStateListener;
+    private String mUserName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,10 +54,55 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         Timber.plant(new Timber.DebugTree());
         ButterKnife.bind(this);
 
+        mFirebaseDatabase = FirebaseDatabase.getInstance();
+        initializeFirebaseAuthLogin();
+
+
+        mTripsDatabaseReference = mFirebaseDatabase.getReference().child("trips");
+
+
+
         setSupportActionBar(mMainToolbar);
         displayFragment(new TripsFragment(), TripsFragment.class.getSimpleName());
         setOnNavigationItemSelectedListener();
         connectToGoogleApiClient();
+
+
+    }
+
+    private void initializeFirebaseAuthLogin(){
+        mFirebaseAuth = FirebaseAuth.getInstance();
+        mAuthStateListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if(user != null){
+                    onSignedInInitialized(user.getDisplayName());
+
+                } else {
+                    onSignedOutCleanUp();
+                    startActivityForResult(
+                            AuthUI.getInstance()
+                                    .createSignInIntentBuilder()
+                                    .setIsSmartLockEnabled(false)
+                                    .setAvailableProviders(
+                                            Arrays.asList(new AuthUI.IdpConfig.Builder(AuthUI.EMAIL_PROVIDER).build(),
+                                                    new AuthUI.IdpConfig.Builder(AuthUI.GOOGLE_PROVIDER).build()))
+                                    .setTheme(R.style.LoginTheme)
+                                    .build(),
+                            RC_SIGN_IN);
+                }
+
+            }
+        };
+    }
+
+    private void onSignedOutCleanUp() {
+        mUserName = ANONYMOUS;
+    }
+
+    private void onSignedInInitialized(String displayName) {
+        mUserName = displayName;
     }
 
 
@@ -144,6 +203,17 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mFirebaseAuth.addAuthStateListener(mAuthStateListener);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mFirebaseAuth.removeAuthStateListener(mAuthStateListener);
+    }
 
     @Override
     public void onBackPressed() {
