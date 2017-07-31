@@ -70,30 +70,33 @@ public class ItineraryItem {
         private String mNote;
 
         public ItineraryItem.Builder withStartTime(String startTime){
-
+            mStartTime = startTime;
             return this;
         }
 
         public ItineraryItem.Builder withEndTime(String endTime){
+            mEndTime = endTime;
             return this;
         }
 
 
         public ItineraryItem.Builder withStartDate(String startDate){
+            mStartDate = startDate;
             return this;
         }
 
         public ItineraryItem.Builder withEndDate(String endDate){
+            mEndDate = endDate;
             return this;
         }
 
         public ItineraryItem.Builder withPlaceId(String placeId){
-
+            mPlaceId = placeId;
             return this;
         }
 
         public ItineraryItem.Builder withNote(String note){
-
+            mNote = note;
             return this;
         }
 

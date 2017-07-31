@@ -86,9 +86,6 @@ public class AddTripFragment extends Fragment implements DatePickerDialog.OnDate
 
     private Trip buildTrip() {
 
-        String dateStart = dateStartEditText.getText().toString();
-
-
         String userId = ((MainActivity)getActivity()).getUserId();
 
         Trip trip = new Trip.Builder(userId)

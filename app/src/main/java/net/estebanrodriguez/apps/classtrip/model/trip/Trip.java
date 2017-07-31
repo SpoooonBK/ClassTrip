@@ -19,6 +19,7 @@ public final class Trip {
         mItinerary = new TripItinerary();
         mOrganizerIds = new ArrayList<>();
         addOrganizerID(builder.mOrganizerId);
+        setInitialItinerary(builder);
     }
 
     public String getTripId() {
