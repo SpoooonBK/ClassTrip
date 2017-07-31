@@ -11,14 +11,13 @@ public final class Trip {
 
     private String mTripId;
     private List<String> mOrganizerIds;
-    private String mTripName;
     private Itinerary mItinerary;
 
     private Trip(Builder builder) {
-        mTripName = builder.mName;
         mTripId = UUID.randomUUID().toString();
         mItinerary = new TripItinerary();
         mOrganizerIds = new ArrayList<>();
+        addOrganizerID(builder.mOrganizerId);
     }
 
     public String getTripId() {
@@ -37,9 +36,16 @@ public final class Trip {
        mOrganizerIds.add(id);
     }
 
+    public void removeOrganizer(String id){
+        mOrganizerIds.remove(id);
+    }
+
+    public String[] getOrganizerIds(){
+        return mOrganizerIds.toArray(new String[mOrganizerIds.size()]);
+    }
+
     public static class Builder{
 
-        private String mName;
         private String mStartDate;
         private String mEndDate;
         private String mStartTime;
@@ -49,8 +55,8 @@ public final class Trip {
 
 
 
-        public Builder(String name){
-            mName = name;
+        public Builder(String organizerId){
+            mOrganizerId = organizerId;
         }
 
         public Builder withStartDate(String startDate){
@@ -75,11 +81,6 @@ public final class Trip {
 
         public Builder withPlace(String place){
             mPlace = place;
-            return this;
-        }
-
-        public Builder withOrganizer(String organizerId){
-            mOrganizerId = organizerId;
             return this;
         }
 
