@@ -21,6 +21,7 @@ import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlacePicker;
 
 import net.estebanrodriguez.apps.classtrip.R;
+import net.estebanrodriguez.apps.classtrip.model.trip.Trip;
 import net.estebanrodriguez.apps.classtrip.ui.activities.MainActivity;
 import net.estebanrodriguez.apps.classtrip.utilities.DateValidator;
 import net.estebanrodriguez.apps.classtrip.utilities.TimeValidator;
@@ -52,6 +53,12 @@ public class AddTripFragment extends Fragment implements DatePickerDialog.OnDate
     private Calendar calendar = Calendar.getInstance();
     private Unbinder mUnbinder;
 
+    private String mDateStart;
+    private String mDateEnd;
+    private String mTimeStart;
+    private String mTimeEnd;
+    private String mPlaceId;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -62,27 +69,52 @@ public class AddTripFragment extends Fragment implements DatePickerDialog.OnDate
 
     @OnClick(R.id.add_trip_done_fab)
     public void onAddTripDoneClicked(){
-        validateDates();
-        validateTimes();
-        ((MainActivity)getActivity()).showBottomNavigation();
-        getFragmentManager().popBackStack();
+
+        mDateStart = dateStartEditText.getText().toString();
+        mDateEnd = dateEndEditText.getText().toString();
+        mTimeStart = timeStartEditText.getText().toString();
+        mTimeEnd = timeEndEditText.getText().toString();
+
+        if(areDatesValid() && areTimesValid() && mPlaceId != null){
+            Trip trip = buildTrip();
+            ((MainActivity)getActivity()).showBottomNavigation();
+            getFragmentManager().popBackStack();
+        }
+
 
     }
 
-    private void validateDates(){
+    private Trip buildTrip() {
+
         String dateStart = dateStartEditText.getText().toString();
-        String dateEnd = dateEndEditText.getText().toString();
-        if(!DateValidator.isStartDateIsSameOrBeforeEndDate(dateStart, dateEnd)){
+
+
+        String userId = ((MainActivity)getActivity()).getUserId();
+
+        Trip trip = new Trip.Builder(userId)
+                .withStartDate(mDateStart)
+                .withEndDate(mDateEnd)
+                .withStartTime(mTimeStart)
+                .withEndTime(mTimeEnd)
+                .withPlace(mPlaceId)
+                .build();
+        return trip;
+    }
+
+    private boolean areDatesValid(){
+        boolean isValid = DateValidator.isStartDateIsSameOrBeforeEndDate(mDateStart, mDateEnd);
+        if(!isValid){
             Toast.makeText(getActivity(), getString(R.string.dates_invalid),Toast.LENGTH_LONG).show();
         }
+        return isValid;
     }
 
-    private void validateTimes(){
-        String timeStart = timeStartEditText.getText().toString();
-        String timeEnd = timeEndEditText.getText().toString();
-        if(!TimeValidator.isStartTimeBeforeEndTime(timeStart, timeEnd)){
+    private boolean areTimesValid(){
+        boolean isValid = TimeValidator.isStartTimeBeforeEndTime(mTimeStart, mTimeEnd);
+        if(!isValid){
             Toast.makeText(getActivity(), getString(R.string.times_invalid),Toast.LENGTH_LONG).show();
         }
+        return isValid;
     }
 
 
@@ -137,6 +169,7 @@ public class AddTripFragment extends Fragment implements DatePickerDialog.OnDate
             String name = place.getName().toString();
             String address = place.getAddress().toString();
             String nameAndAddress = name + "\n" + address;
+            mPlaceId = place.getId();
 
             placeEditText.setText(nameAndAddress);
         }

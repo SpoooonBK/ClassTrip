@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     private DatabaseReference mTripsDatabaseReference;
     private FirebaseAuth mFirebaseAuth;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
-    private String mUserName;
+    private String mUserId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,8 +66,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         displayFragment(new TripsFragment(), TripsFragment.class.getSimpleName());
         setOnNavigationItemSelectedListener();
         connectToGoogleApiClient();
-
-
     }
 
     private void initializeFirebaseAuthLogin(){
@@ -77,7 +75,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if(user != null){
-                    onSignedInInitialized(user.getDisplayName());
+                    onSignedInInitialized(user.getUid());
 
                 } else {
                     onSignedOutCleanUp();
@@ -98,11 +96,11 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     }
 
     private void onSignedOutCleanUp() {
-        mUserName = ANONYMOUS;
+        mUserId = ANONYMOUS;
     }
 
-    private void onSignedInInitialized(String displayName) {
-        mUserName = displayName;
+    private void onSignedInInitialized(String userId) {
+        mUserId = userId;
     }
 
 
@@ -118,6 +116,14 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         mBottomNavigationView.setOnNavigationItemSelectedListener(this);
     }
 
+    public boolean isSignedIn(){
+        FirebaseUser user = mFirebaseAuth.getCurrentUser();
+        return (user != null);
+    }
+
+    public String getUserId() {
+        return mUserId;
+    }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
