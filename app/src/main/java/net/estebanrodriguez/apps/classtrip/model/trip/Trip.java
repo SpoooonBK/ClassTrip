@@ -1,6 +1,7 @@
 package net.estebanrodriguez.apps.classtrip.model.trip;
 
 import net.estebanrodriguez.apps.classtrip.model.itinerary.Itinerary;
+import net.estebanrodriguez.apps.classtrip.model.itinerary.ItineraryItem;
 import net.estebanrodriguez.apps.classtrip.model.itinerary.TripItinerary;
 
 import java.util.ArrayList;
@@ -32,6 +33,30 @@ public final class Trip {
         return mItinerary;
     }
 
+    public void setInitialItinerary(Builder builder){
+        ItineraryItem.Builder itineraryBuilder = new ItineraryItem.Builder();
+
+        if(builder.mPlaceId != null){
+            itineraryBuilder.withPlaceId(builder.mPlaceId);
+        }
+        if(builder.mStartDate != null){
+            itineraryBuilder.withStartDate(builder.mStartDate);
+        }
+        if(builder.mEndDate != null){
+            itineraryBuilder.withEndDate(builder.mEndDate);
+        }
+        if(builder.mStartTime != null){
+            itineraryBuilder.withStartTime(builder.mStartTime);
+        }
+        if(builder.mEndTime != null){
+            itineraryBuilder.withEndTime(builder.mEndTime);
+        }
+        if(builder.mNote != null){
+            itineraryBuilder.withNote(builder.mNote);
+        }
+        mItinerary.addItem(itineraryBuilder.build());
+    }
+
     public void addOrganizerID(String id){
        mOrganizerIds.add(id);
     }
@@ -50,7 +75,8 @@ public final class Trip {
         private String mEndDate;
         private String mStartTime;
         private String mEndTime;
-        private String mPlace;
+        private String mPlaceId;
+        private String mNote;
         private String mOrganizerId;
 
 
@@ -80,7 +106,12 @@ public final class Trip {
         }
 
         public Builder withPlace(String place){
-            mPlace = place;
+            mPlaceId = place;
+            return this;
+        }
+
+        public Builder withNote(String note){
+            mNote = note;
             return this;
         }
 
