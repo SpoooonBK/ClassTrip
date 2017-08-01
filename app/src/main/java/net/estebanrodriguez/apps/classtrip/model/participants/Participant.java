@@ -21,6 +21,14 @@ public abstract class Participant {
         mAccessType = accessType;
     }
 
+    public Participant(String id, String firstName, String lastName, ContactInfo contactInfo, AccessType accessType) {
+        mID = id;
+        mFirstName = firstName;
+        mLastName = lastName;
+        mContactInfo = contactInfo;
+        mAccessType = accessType;
+    }
+
     public String getID() {
         return mID;
     }

@@ -8,9 +8,9 @@ public interface  Group {
 
     public void setName(String name);
 
-    public void addParticipant(Participant participant);
+    public void add(Participant participant);
 
-    public void removeParticipant(Participant participant);
+    public void remove(Participant participant);
 
     public int size();
 }

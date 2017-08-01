@@ -1,5 +1,7 @@
 package net.estebanrodriguez.apps.classtrip.model.trip;
 
+import net.estebanrodriguez.apps.classtrip.model.groups.Group;
+import net.estebanrodriguez.apps.classtrip.model.groups.StandardGroup;
 import net.estebanrodriguez.apps.classtrip.model.itinerary.Itinerary;
 import net.estebanrodriguez.apps.classtrip.model.itinerary.ItineraryItem;
 import net.estebanrodriguez.apps.classtrip.model.itinerary.TripItinerary;
@@ -11,13 +13,15 @@ import java.util.UUID;
 public final class Trip {
 
     private String mTripId;
-    private List<String> mOrganizerIds;
+    private Group mAllParticipants;
+    private List<String> mGroupIds;
     private Itinerary mItinerary;
 
     private Trip(Builder builder) {
         mTripId = UUID.randomUUID().toString();
         mItinerary = new TripItinerary();
-        mOrganizerIds = new ArrayList<>();
+        mGroupIds = new ArrayList<>();
+        mAllParticipants = new StandardGroup();
         addOrganizerID(builder.mOrganizerId);
         setInitialItinerary(builder);
     }
@@ -59,7 +63,7 @@ public final class Trip {
     }
 
     public void addOrganizerID(String id){
-       mOrganizerIds.add(id);
+       mAllParticipants.add(id);
     }
 
     public void removeOrganizer(String id){
