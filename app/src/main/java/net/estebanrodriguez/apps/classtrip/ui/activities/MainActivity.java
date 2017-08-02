@@ -81,6 +81,9 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         connectToGoogleApiClient();
     }
 
+
+    //Authorization and Registration
+
     private void initializeFirebaseAuthLogin(){
         mFirebaseAuth = FirebaseAuth.getInstance();
         mAuthStateListener = new FirebaseAuth.AuthStateListener() {
@@ -116,7 +119,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         mUserId = user.getUid();
         Intent intent = new Intent(this,RegistrationActivity.class);
         startActivityForResult(intent, RC_REGISTRATION);
-
     }
 
     @Override
@@ -156,6 +158,8 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         GoogleApiClient googleApiClient = helper.getGoogleApiClient();
         googleApiClient.connect();
     }
+
+    //UI Management
 
     private void setOnNavigationItemSelectedListener() {
 
