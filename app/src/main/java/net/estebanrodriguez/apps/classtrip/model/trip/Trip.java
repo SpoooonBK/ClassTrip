@@ -5,6 +5,7 @@ import net.estebanrodriguez.apps.classtrip.model.groups.StandardGroup;
 import net.estebanrodriguez.apps.classtrip.model.itinerary.Itinerary;
 import net.estebanrodriguez.apps.classtrip.model.itinerary.ItineraryItem;
 import net.estebanrodriguez.apps.classtrip.model.itinerary.TripItinerary;
+import net.estebanrodriguez.apps.classtrip.model.participants.Participant;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +23,7 @@ public final class Trip {
         mItinerary = new TripItinerary();
         mGroupIds = new ArrayList<>();
         mAllParticipants = new StandardGroup();
-        addOrganizerID(builder.mOrganizerId);
+        addOrganizerID(builder.mOrganizer);
         setInitialItinerary(builder);
     }
 
@@ -62,17 +63,10 @@ public final class Trip {
         mItinerary.addItem(itineraryBuilder.build());
     }
 
-    public void addOrganizerID(String id){
-       mAllParticipants.add(id);
+    public void addOrganizerID(Participant participant){
+       mAllParticipants.add(participant);
     }
 
-    public void removeOrganizer(String id){
-        mOrganizerIds.remove(id);
-    }
-
-    public String[] getOrganizerIds(){
-        return mOrganizerIds.toArray(new String[mOrganizerIds.size()]);
-    }
 
     public static class Builder{
 
@@ -82,12 +76,12 @@ public final class Trip {
         private String mEndTime;
         private String mPlaceId;
         private String mNote;
-        private String mOrganizerId;
+        private Participant mOrganizer;
 
 
 
-        public Builder(String organizerId){
-            mOrganizerId = organizerId;
+        public Builder(Participant organizer){
+            mOrganizer = organizer;
         }
 
         public Builder withStartDate(String startDate){

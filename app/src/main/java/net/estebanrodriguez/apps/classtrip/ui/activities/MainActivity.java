@@ -1,5 +1,7 @@
 package net.estebanrodriguez.apps.classtrip.ui.activities;
 
+import android.content.Intent;
+import android.icu.text.MessagePattern;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -17,10 +19,20 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import net.estebanrodriguez.apps.classtrip.R;
+import net.estebanrodriguez.apps.classtrip.model.contact_info.Address;
+import net.estebanrodriguez.apps.classtrip.model.contact_info.ContactInfo;
+import net.estebanrodriguez.apps.classtrip.model.contact_info.PhoneNumber;
+import net.estebanrodriguez.apps.classtrip.model.contact_info.PhoneNumberInfo;
+import net.estebanrodriguez.apps.classtrip.model.contact_info.PhoneNumberType;
+import net.estebanrodriguez.apps.classtrip.model.contact_info.StandardContactInfo;
+import net.estebanrodriguez.apps.classtrip.model.participants.AccessType;
+import net.estebanrodriguez.apps.classtrip.model.participants.Participant;
+import net.estebanrodriguez.apps.classtrip.model.participants.StandardParticipant;
 import net.estebanrodriguez.apps.classtrip.ui.fragments.AllParticipantsFragment;
 import net.estebanrodriguez.apps.classtrip.ui.fragments.GroupsFragment;
 import net.estebanrodriguez.apps.classtrip.ui.fragments.MessagesFragment;
 import net.estebanrodriguez.apps.classtrip.ui.fragments.TripsFragment;
+import net.estebanrodriguez.apps.classtrip.utilities.Constants;
 import net.estebanrodriguez.apps.classtrip.utilities.GoogleApiClientHelper;
 
 import java.util.Arrays;
@@ -33,6 +45,7 @@ import timber.log.Timber;
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 
     private static final int RC_SIGN_IN = 1;
+    private static final int RC_REGISTRATION = 2;
     private static final String ANONYMOUS = "Anonymous";
     @BindView(R.id.fragment_holder)
     FrameLayout mFragmentHolder;
@@ -46,6 +59,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     private FirebaseAuth mFirebaseAuth;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
     private String mUserId;
+    private Participant mParticipant;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +75,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         mTripsDatabaseReference = mFirebaseDatabase.getReference().child("trips");
 
 
-
         setSupportActionBar(mMainToolbar);
         displayFragment(new TripsFragment(), TripsFragment.class.getSimpleName());
         setOnNavigationItemSelectedListener();
@@ -75,7 +88,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if(user != null){
-                    onSignedInInitialized(user.getUid());
+                    onSignedInInitialized(user);
 
                 } else {
                     onSignedOutCleanUp();
@@ -99,10 +112,43 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         mUserId = ANONYMOUS;
     }
 
-    private void onSignedInInitialized(String userId) {
-        mUserId = userId;
+    private void onSignedInInitialized(FirebaseUser user) {
+        mUserId = user.getUid();
+        Intent intent = new Intent(this,RegistrationActivity.class);
+        startActivityForResult(intent, RC_REGISTRATION);
+
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == RC_REGISTRATION && resultCode == RESULT_OK){
+
+            String firstName = data.getStringExtra(Constants.FIRST_NAME);
+            String lastName = data.getStringExtra(Constants.LAST_NAME);
+            String fullName = firstName + " " + lastName;
+            String mobileNumber = data.getStringExtra(Constants.MOBILE_NUMBER);
+            String emergencyContactName = data.getStringExtra(Constants.EMERGENCY_CONTACT_NAME);
+            String emergencyContactPhone = data.getStringExtra(Constants.EMERGENCY_CONTACT_PHONE);
+
+            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+            String userEmail = user.getEmail();
+            Address address = new Address(userEmail);
+
+
+            PhoneNumber mobilePhone = new PhoneNumber(fullName, mobileNumber, PhoneNumberType.MOBILE);
+            PhoneNumber emergencyPhone = new PhoneNumber(emergencyContactName, emergencyContactPhone, PhoneNumberType.EMERGENCY);
+
+
+            PhoneNumberInfo phoneNumberInfo = new PhoneNumberInfo();
+            phoneNumberInfo.addPhoneNumber(mobilePhone);
+            phoneNumberInfo.addPhoneNumber(emergencyPhone);
+
+            ContactInfo contactInfo = new StandardContactInfo(address, phoneNumberInfo);
+            mParticipant = new StandardParticipant(mUserId, firstName, lastName, contactInfo, AccessType.ORGANIZER);
+
+        }
+    }
 
     private void connectToGoogleApiClient() {
 
@@ -123,6 +169,10 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
     public String getUserId() {
         return mUserId;
+    }
+
+    public Participant getParticipant() {
+        return mParticipant;
     }
 
     @Override

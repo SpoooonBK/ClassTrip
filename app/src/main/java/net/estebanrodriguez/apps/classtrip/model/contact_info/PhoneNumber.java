@@ -4,9 +4,10 @@ public final class PhoneNumber {
 
     private final String mPhoneNumber;
     private final PhoneNumberType mPhoneNumberType;
-    private String name;
+    private final String mName;
 
-    public PhoneNumber(String phoneNumber, PhoneNumberType phoneNumberType) {
+    public PhoneNumber(String name, String phoneNumber, PhoneNumberType phoneNumberType) {
+        mName = name;
         mPhoneNumber = phoneNumber;
         mPhoneNumberType = phoneNumberType;
     }
@@ -16,11 +17,7 @@ public final class PhoneNumber {
     }
 
     public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+        return mName;
     }
 
     @Override

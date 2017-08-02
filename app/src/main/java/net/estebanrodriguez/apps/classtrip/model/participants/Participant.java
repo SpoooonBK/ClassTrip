@@ -13,6 +13,7 @@ public abstract class Participant {
     private final ContactInfo mContactInfo;
     private final AccessType mAccessType;
 
+
     public Participant(String firstName, String lastName, ContactInfo contactInfo, AccessType accessType) {
         mID = UUID.randomUUID().toString();
         mFirstName = firstName;
@@ -20,6 +21,7 @@ public abstract class Participant {
         mContactInfo = contactInfo;
         mAccessType = accessType;
     }
+
 
     public Participant(String id, String firstName, String lastName, ContactInfo contactInfo, AccessType accessType) {
         mID = id;

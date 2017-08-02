@@ -99,11 +99,11 @@ public class AddParticipantFragment extends Fragment {
         String emergencyContactName = mEmergencyNameEditText.getText().toString();
         String emergencyContactPhone = mEmergencyPhoneEditText.getText().toString();
 
-        PhoneNumber phoneNumber = new PhoneNumber(phone, PhoneNumberType.MOBILE);
-        phoneNumber.setName(fullName);
+        PhoneNumber phoneNumber = new PhoneNumber(fullName, phone, PhoneNumberType.MOBILE);
 
-        PhoneNumber emergencyContact = new PhoneNumber(emergencyContactPhone, PhoneNumberType.EMERGENCY);
-        emergencyContact.setName(emergencyContactName);
+
+        PhoneNumber emergencyContact = new PhoneNumber(emergencyContactName, emergencyContactPhone, PhoneNumberType.EMERGENCY);
+
 
         PhoneNumberInfo phoneNumberInfo = new PhoneNumberInfo();
         phoneNumberInfo.addPhoneNumber(phoneNumber);
