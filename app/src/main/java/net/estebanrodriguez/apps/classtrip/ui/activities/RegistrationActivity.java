@@ -14,6 +14,7 @@ import net.estebanrodriguez.apps.classtrip.utilities.Constants;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import timber.log.Timber;
 
 
 public class RegistrationActivity extends AppCompatActivity {
@@ -34,6 +35,7 @@ public class RegistrationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState, persistentState);
         ButterKnife.bind(this);
         setContentView(R.layout.user_registration);
+        Timber.v("Registration OnCreate");
     }
 
     @OnClick(R.id.user_registration_done_fab)

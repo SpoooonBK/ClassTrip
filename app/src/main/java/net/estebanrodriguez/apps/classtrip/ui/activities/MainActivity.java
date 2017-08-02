@@ -117,7 +117,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
     private void onSignedInInitialized(FirebaseUser user) {
         mUserId = user.getUid();
-        Intent intent = new Intent(this,RegistrationActivity.class);
+        Intent intent = new Intent(this, RegistrationActivity.class);
         startActivityForResult(intent, RC_REGISTRATION);
     }
 
