@@ -66,7 +66,7 @@ public class AddParticipantFragment extends Fragment {
         PhoneNumberInfo phoneNumberInfo = setPhoneNumberInfo();
 
         ContactInfo contactInfo = new StandardContactInfo(address, phoneNumberInfo);
-        Participant participant = new StandardParticipant(firstName, lastName, contactInfo, accessType);
+        Participant participant = new StandardParticipant(firstName, lastName, contactInfo);
         ((MainActivity)getActivity()).showBottomNavigation();
         getFragmentManager().popBackStack();
     }

@@ -1,7 +1,6 @@
 package net.estebanrodriguez.apps.classtrip.ui.activities;
 
 import android.content.Intent;
-import android.icu.text.MessagePattern;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -25,7 +24,6 @@ import net.estebanrodriguez.apps.classtrip.model.contact_info.PhoneNumber;
 import net.estebanrodriguez.apps.classtrip.model.contact_info.PhoneNumberInfo;
 import net.estebanrodriguez.apps.classtrip.model.contact_info.PhoneNumberType;
 import net.estebanrodriguez.apps.classtrip.model.contact_info.StandardContactInfo;
-import net.estebanrodriguez.apps.classtrip.model.participants.AccessType;
 import net.estebanrodriguez.apps.classtrip.model.participants.Participant;
 import net.estebanrodriguez.apps.classtrip.model.participants.StandardParticipant;
 import net.estebanrodriguez.apps.classtrip.ui.fragments.AllParticipantsFragment;
@@ -151,7 +149,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
             phoneNumberInfo.addPhoneNumber(emergencyPhone);
 
             ContactInfo contactInfo = new StandardContactInfo(address, phoneNumberInfo);
-            mParticipant = new StandardParticipant(mUserId, firstName, lastName, contactInfo, AccessType.ORGANIZER);
+            mParticipant = new StandardParticipant(mUserId, firstName, lastName, contactInfo);
 
         }
     }
