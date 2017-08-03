@@ -36,6 +36,10 @@ public final class Trip {
         return mItineraryItems;
     }
 
+    public Map<String, AccessType> getParticipantAccessMap(){
+        return mParticipantAccessMap;
+    }
+
     public void setInitialItinerary(Builder builder){
         ItineraryItem.Builder itineraryBuilder = new ItineraryItem.Builder();
 

@@ -21,6 +21,8 @@ import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlacePicker;
 
 import net.estebanrodriguez.apps.classtrip.R;
+import net.estebanrodriguez.apps.classtrip.data.DataAccessObject;
+import net.estebanrodriguez.apps.classtrip.data.FirebaseDAO;
 import net.estebanrodriguez.apps.classtrip.model.participants.Participant;
 import net.estebanrodriguez.apps.classtrip.model.trip.Trip;
 import net.estebanrodriguez.apps.classtrip.ui.activities.MainActivity;
@@ -96,6 +98,8 @@ public class AddTripFragment extends Fragment implements DatePickerDialog.OnDate
                 .withEndTime(mTimeEnd)
                 .withPlace(mPlaceId)
                 .build();
+        DataAccessObject DAO = FirebaseDAO.getInstance();
+        DAO.add(trip);
         return trip;
     }
 

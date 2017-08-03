@@ -13,6 +13,8 @@ public class ItineraryItem {
     private String mEndTime;
     private String mNote;
 
+    public ItineraryItem() { //Used for Firebase Data
+    }
 
     private ItineraryItem(Builder builder) {
 

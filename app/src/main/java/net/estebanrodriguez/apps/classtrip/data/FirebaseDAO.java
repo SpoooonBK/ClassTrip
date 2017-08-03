@@ -4,13 +4,18 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import net.estebanrodriguez.apps.classtrip.model.contact_info.PhoneNumber;
+import net.estebanrodriguez.apps.classtrip.model.itinerary.ItineraryItem;
+import net.estebanrodriguez.apps.classtrip.model.participants.AccessType;
 import net.estebanrodriguez.apps.classtrip.model.participants.Participant;
 import net.estebanrodriguez.apps.classtrip.model.trip.Trip;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
-public class FirebaseDAO implements DAO{
+public class FirebaseDAO implements DataAccessObject {
 
     private final FirebaseDatabase mFirebaseDatabase;
 
@@ -18,7 +23,7 @@ public class FirebaseDAO implements DAO{
         mFirebaseDatabase = FirebaseDatabase.getInstance();
     }
 
-    public static DAO getInstance(){
+    public static DataAccessObject getInstance(){
         return new FirebaseDAO();
     }
 
@@ -26,7 +31,8 @@ public class FirebaseDAO implements DAO{
     public void add(Trip trip) {
         DatabaseReference trips = mFirebaseDatabase.getReference("trips");
         DatabaseReference tripId = trips.push();
-        tripId.getKey();
+        trip.setTripId(tripId.getKey());
+        tripId.setValue(new FirebaseTrip(trip));
     }
 
     @Override
@@ -110,4 +116,40 @@ public class FirebaseDAO implements DAO{
             return mPhoneNumberType;
         }
     }
+
+    private class FirebaseTrip {
+        private String mId;
+        private List<ItineraryItem> mItineraryItems;
+        private Map<String, String> mParticipantAccessMap;
+
+        public FirebaseTrip() {
+        }
+
+        public FirebaseTrip(Trip trip) {
+            mId = trip.getTripId();
+            mItineraryItems = trip.getItinerary();
+            mParticipantAccessMap = new HashMap<>();
+
+            Set<Map.Entry<String, AccessType>> participantSet = trip.getParticipantAccessMap().entrySet();
+            for(Map.Entry entry: participantSet){
+                String participantId = (String) entry.getKey();
+                String accessType = ((AccessType) entry.getValue()).toString();
+                mParticipantAccessMap.put(participantId, accessType);
+            }
+        }
+
+        public String getId() {
+            return mId;
+        }
+
+        public List<ItineraryItem> getItineraryItems() {
+            return mItineraryItems;
+        }
+
+        public Map<String, String> getParticipantAccessMap() {
+            return mParticipantAccessMap;
+        }
+    }
+
+
 }
