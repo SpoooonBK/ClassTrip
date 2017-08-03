@@ -31,10 +31,10 @@ public class RegistrationActivity extends AppCompatActivity {
     EditText mEmergencyPhoneEditText;
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
-        super.onCreate(savedInstanceState, persistentState);
-        ButterKnife.bind(this);
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.user_registration);
+        ButterKnife.bind(this);
         Timber.v("Registration OnCreate");
     }
 
@@ -54,6 +54,7 @@ public class RegistrationActivity extends AppCompatActivity {
         resultIntent.putExtra(Constants.EMERGENCY_CONTACT_PHONE, emergencyContactPhone);
 
         setResult(RESULT_OK, resultIntent);
+        onBackPressed();
     }
 
 
