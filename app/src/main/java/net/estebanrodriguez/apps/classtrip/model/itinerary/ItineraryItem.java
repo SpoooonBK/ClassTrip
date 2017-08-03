@@ -2,7 +2,10 @@ package net.estebanrodriguez.apps.classtrip.model.itinerary;
 
 import com.google.android.gms.location.places.Place;
 
+import java.util.UUID;
+
 public class ItineraryItem {
+    private String mItineraryId;
     private String mPlaceId;
     private String mStartDate;
     private String mEndDate;
@@ -12,6 +15,8 @@ public class ItineraryItem {
 
 
     private ItineraryItem(Builder builder) {
+
+        mItineraryId = UUID.randomUUID().toString();
 
         if(builder.mPlaceId != null){
             mPlaceId = builder.mPlaceId;
@@ -31,6 +36,10 @@ public class ItineraryItem {
         if(builder.mNote != null){
             mNote = builder.mNote;
         }
+    }
+
+    public String getItineraryId() {
+        return mItineraryId;
     }
 
     public String getPlaceId() {

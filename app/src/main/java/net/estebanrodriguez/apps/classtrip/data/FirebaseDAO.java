@@ -24,6 +24,9 @@ public class FirebaseDAO implements DAO{
 
     @Override
     public void add(Trip trip) {
+        DatabaseReference trips = mFirebaseDatabase.getReference("trips");
+        DatabaseReference tripId = trips.push();
+        tripId.getKey();
     }
 
     @Override

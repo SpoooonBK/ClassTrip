@@ -1,30 +1,24 @@
 package net.estebanrodriguez.apps.classtrip.model.trip;
 
-import net.estebanrodriguez.apps.classtrip.model.groups.Group;
-import net.estebanrodriguez.apps.classtrip.model.groups.StandardGroup;
-import net.estebanrodriguez.apps.classtrip.model.itinerary.Itinerary;
 import net.estebanrodriguez.apps.classtrip.model.itinerary.ItineraryItem;
-import net.estebanrodriguez.apps.classtrip.model.itinerary.TripItinerary;
 import net.estebanrodriguez.apps.classtrip.model.participants.AccessType;
 import net.estebanrodriguez.apps.classtrip.model.participants.Participant;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-import java.util.UUID;
+import java.util.Map;
 
 public final class Trip {
 
     private String mTripId;
-    private Group mAllParticipants;
-    private List<String> mGroupIds;
-    private Itinerary mItinerary;
+    private List<ItineraryItem> mItineraryItems;
+    private Map<String, AccessType> mParticipantAccessMap;
 
     private Trip(Builder builder) {
-        mTripId = UUID.randomUUID().toString();
-        mItinerary = new TripItinerary();
-        mGroupIds = new ArrayList<>();
-        mAllParticipants = new StandardGroup();
-        addOrganizerID(builder.mOrganizer);
+        mItineraryItems = new ArrayList<>();
+        mParticipantAccessMap = new HashMap<>();
+        addParticipant(builder.mOrganizer, AccessType.ORGANIZER);
         setInitialItinerary(builder);
     }
 
@@ -32,12 +26,14 @@ public final class Trip {
         return null;
     }
 
+    public void setTripId(String id){mTripId = id;}
+
     public String getName() {
         return null;
     }
 
-    public Itinerary getItinerary() {
-        return mItinerary;
+    public List<ItineraryItem> getItinerary() {
+        return mItineraryItems;
     }
 
     public void setInitialItinerary(Builder builder){
@@ -61,11 +57,15 @@ public final class Trip {
         if(builder.mNote != null){
             itineraryBuilder.withNote(builder.mNote);
         }
-        mItinerary.addItem(itineraryBuilder.build());
+        mItineraryItems.add(itineraryBuilder.build());
     }
 
-    public void addOrganizerID(Participant participant){
-       mAllParticipants.add(participant, AccessType.ORGANIZER);
+    public void addParticipant(Participant participant, AccessType accessType){
+       mParticipantAccessMap.put(participant.getID(), accessType);
+    }
+
+    public int itinerarySize(){
+        return mItineraryItems.size();
     }
 
 
@@ -119,11 +119,7 @@ public final class Trip {
 
             return new Trip(this);
         }
-
-
     }
-
-
 
 
 }
