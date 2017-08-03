@@ -18,6 +18,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import net.estebanrodriguez.apps.classtrip.R;
+import net.estebanrodriguez.apps.classtrip.data.DAO;
+import net.estebanrodriguez.apps.classtrip.data.FirebaseDAO;
 import net.estebanrodriguez.apps.classtrip.model.contact_info.Address;
 import net.estebanrodriguez.apps.classtrip.model.contact_info.ContactInfo;
 import net.estebanrodriguez.apps.classtrip.model.contact_info.PhoneNumber;
@@ -58,6 +60,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     private FirebaseAuth.AuthStateListener mAuthStateListener;
     private String mUserId;
     private Participant mParticipant;
+    private DAO mDAO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +68,8 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         setContentView(R.layout.activity_main);
         Timber.plant(new Timber.DebugTree());
         ButterKnife.bind(this);
+
+        mDAO = FirebaseDAO.getInstance();
 
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         initializeFirebaseAuthLogin();
@@ -150,6 +155,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
             ContactInfo contactInfo = new StandardContactInfo(address, phoneNumberInfo);
             mParticipant = new StandardParticipant(mUserId, firstName, lastName, contactInfo);
+            mDAO.add(mParticipant);
 
         }
     }

@@ -1,5 +1,6 @@
 package net.estebanrodriguez.apps.classtrip.model.groups;
 
+import net.estebanrodriguez.apps.classtrip.model.participants.AccessType;
 import net.estebanrodriguez.apps.classtrip.model.participants.Participant;
 
 import java.util.ArrayList;
@@ -38,11 +39,11 @@ public class StandardGroup implements Group {
     }
 
     @Override
-    public void add(Participant participant){
+    public void add(Participant participant, AccessType accessType){
 
         String id = participant.getID();
 
-        switch (participant.getAccessType()){
+        switch (accessType){
 
             case SCHOOL:
                 break;

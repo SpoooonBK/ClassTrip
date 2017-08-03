@@ -5,6 +5,7 @@ import net.estebanrodriguez.apps.classtrip.model.groups.StandardGroup;
 import net.estebanrodriguez.apps.classtrip.model.itinerary.Itinerary;
 import net.estebanrodriguez.apps.classtrip.model.itinerary.ItineraryItem;
 import net.estebanrodriguez.apps.classtrip.model.itinerary.TripItinerary;
+import net.estebanrodriguez.apps.classtrip.model.participants.AccessType;
 import net.estebanrodriguez.apps.classtrip.model.participants.Participant;
 
 import java.util.ArrayList;
@@ -64,7 +65,7 @@ public final class Trip {
     }
 
     public void addOrganizerID(Participant participant){
-       mAllParticipants.add(participant);
+       mAllParticipants.add(participant, AccessType.ORGANIZER);
     }
 
 

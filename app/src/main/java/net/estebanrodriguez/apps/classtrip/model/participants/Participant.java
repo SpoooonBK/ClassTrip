@@ -13,7 +13,6 @@ public abstract class Participant {
     private final ContactInfo mContactInfo;
 
 
-
     public Participant(String firstName, String lastName, ContactInfo contactInfo) {
         mID = UUID.randomUUID().toString();
         mFirstName = firstName;

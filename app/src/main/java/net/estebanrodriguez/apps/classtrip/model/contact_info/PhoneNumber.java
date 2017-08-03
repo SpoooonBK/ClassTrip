@@ -12,12 +12,16 @@ public final class PhoneNumber {
         mPhoneNumberType = phoneNumberType;
     }
 
-    public final PhoneNumberType getType() {
+    public PhoneNumberType getType() {
         return mPhoneNumberType;
     }
 
-    public String getName() {
+    public String getContactName() {
         return mName;
+    }
+
+    public String getPhoneNumber() {
+        return mPhoneNumber;
     }
 
     @Override
