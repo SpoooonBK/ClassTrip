@@ -5,7 +5,8 @@ import net.estebanrodriguez.apps.classtrip.model.trip.Trip;
 
 public interface DataAccessObject {
 
-    public void add(Trip trip);
-    public void add(Participant participant);
+    String add(Trip trip);
+    void add(Participant participant);
+    void update(Participant participant);
 
 }

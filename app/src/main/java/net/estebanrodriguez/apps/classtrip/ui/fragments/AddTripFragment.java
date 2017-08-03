@@ -88,7 +88,7 @@ public class AddTripFragment extends Fragment implements DatePickerDialog.OnDate
     }
 
     private Trip buildTrip() {
-
+        //Todo fix null bug
         Participant user = ((MainActivity)getActivity()).getParticipant();
 
         Trip trip = new Trip.Builder(user)
@@ -99,7 +99,10 @@ public class AddTripFragment extends Fragment implements DatePickerDialog.OnDate
                 .withPlace(mPlaceId)
                 .build();
         DataAccessObject DAO = FirebaseDAO.getInstance();
-        DAO.add(trip);
+        String tripId = DAO.add(trip);
+        trip.setTripId(tripId);
+        user.addTrip(trip);
+        DAO.update(user);
         return trip;
     }
 

@@ -18,21 +18,24 @@ import java.util.Set;
 public class FirebaseDAO implements DataAccessObject {
 
     private final FirebaseDatabase mFirebaseDatabase;
+    private final static FirebaseDAO INSTANCE = new FirebaseDAO();
 
     private FirebaseDAO(){
         mFirebaseDatabase = FirebaseDatabase.getInstance();
     }
 
     public static DataAccessObject getInstance(){
-        return new FirebaseDAO();
+        return INSTANCE;
     }
 
     @Override
-    public void add(Trip trip) {
+    public String add(Trip trip) {
         DatabaseReference trips = mFirebaseDatabase.getReference("trips");
         DatabaseReference tripId = trips.push();
+        String tripKey = tripId.getKey();
         trip.setTripId(tripId.getKey());
         tripId.setValue(new FirebaseTrip(trip));
+        return tripKey;
     }
 
     @Override
@@ -41,6 +44,11 @@ public class FirebaseDAO implements DataAccessObject {
         users.child(participant.getID()).setValue(new FirebaseParticipant(participant));
     }
 
+    @Override
+    public void update(Participant participant) {
+        DatabaseReference participantReference = mFirebaseDatabase.getReference("users").child(participant.getID());
+        participantReference.setValue(new FirebaseParticipant(participant));
+    }
 
 
     private class FirebaseParticipant{
@@ -50,6 +58,7 @@ public class FirebaseDAO implements DataAccessObject {
         private String mLastName;
         private String mEmail;
         private List<FirebasePhoneNumber> mPhoneNumbers;
+        private List<String> mTripIds;
 
 
         public FirebaseParticipant() {//default constructor for Firebase Write
@@ -65,6 +74,10 @@ public class FirebaseDAO implements DataAccessObject {
             for(PhoneNumber phoneNumber: phoneNumbers){
                 FirebasePhoneNumber firebasePhoneNumber = new FirebasePhoneNumber(phoneNumber);
                 mPhoneNumbers.add(firebasePhoneNumber);
+            }
+            mTripIds = new ArrayList<>();
+            for(String tripId: participant.getTripIds()){
+                mTripIds.add(tripId);
             }
         }
 
@@ -86,6 +99,10 @@ public class FirebaseDAO implements DataAccessObject {
 
         public List<FirebasePhoneNumber> getPhoneNumbers() {
             return mPhoneNumbers;
+        }
+
+        public List<String> getTripIds() {
+            return mTripIds;
         }
     }
 
